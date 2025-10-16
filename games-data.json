@@ -1,5 +1,5 @@
 {
-  " ב": [
+  "ב": [
     {
       "type": "home",
       "team1": "PHK",
@@ -14,7 +14,7 @@
     },
     {
       "type": "away",
-      "team1": "חדרה מערב",
+      "team1": "חדרה מע׳",
       "team1Suffix": "",
       "team2": "PHK",
       "team2Suffix": "",
@@ -52,7 +52,7 @@
       "type": "home",
       "team1": "PHK",
       "team1Suffix": "",
-      "team2": "חריש-מי עמי",
+      "team2": "מ. חריש",
       "team2Suffix": "",
       "score": "0:0",
       "date": "Dec 25, 2025",
@@ -68,21 +68,21 @@
       "team2Suffix": "",
       "score": "0:0",
       "date": "Jan 1, 2026",
-      "time": "17:30",
+      "time": "19:30",
       "venue": "ביה\"ס מעיינות, רח' הצליל 8, פרדס חנה",
       "venueLink": "https://maps.app.goo.gl/ehjmqR18a53PCmG7A"
     },
     {
       "type": "away",
-      "team1": "חדרה מזרח",
+      "team1": "חדרה מרכז",
       "team1Suffix": "",
       "team2": "PHK",
       "team2Suffix": "",
       "score": "0:0",
-      "date": "Jan 8, 2026",
+      "date": "Jan 1, 2026",
       "time": "17:30",
       "venue": "ביה\"ס תחכמוני, רח' יצחק כושי עפגין 15, חדרה",
-      "venueLink": "https://maps.app.goo.gl/EGQpWnG1f1u64zGK7"
+      "venueLink": "https://maps.app.goo.gl/mXPzwJth4TFfadpy7"
     },
     {
       "type": "home",
@@ -94,11 +94,11 @@
       "date": "Jan 15, 2026",
       "time": "17:30",
       "venue": "ביה\"ס מעיינות, רח' הצליל 8, פרדס חנה כרכור",
-      "venueLink": "https://maps.app.goo.gl/k1nXipMvQzPZNG2C8"
+      "venueLink": "https://maps.app.goo.gl/ohttFa65VUScjE2v7"
     },
     {
       "type": "away",
-      "team1": "הפועל חריש",
+      "team1": "ה. חריש",
       "team1Suffix": "",
       "team2": "PHK",
       "team2Suffix": "",
@@ -106,7 +106,7 @@
       "date": "Jan 29, 2026",
       "time": "19:00",
       "venue": "אולם רונה רמון, רח' דפנה 1, חריש",
-      "venueLink": "https://maps.app.goo.gl/sKTgkQitmnriCB2f6"
+      "venueLink": "https://maps.app.goo.gl/x7bQmGgGqeAMgGbQ6"
     },
     {
       "type": "away",
@@ -118,7 +118,7 @@
       "date": "Feb 26, 2026",
       "time": "17:30",
       "venue": "ביה\"ס מעיינות, רח' הצליל 8, פרדס חנה כרכור",
-      "venueLink": "https://maps.app.goo.gl/mUwmB7ZsU8imvYQp8"
+      "venueLink": "https://maps.app.goo.gl/Xmawk29uzni7zAjQ8"
     },
     {
       "type": "home",
@@ -127,7 +127,7 @@
       "team2": "חדרה מערב",
       "team2Suffix": "",
       "score": "0:0",
-      "date": "Mar 3, 2026",
+      "date": "Mar 5, 2026",
       "time": "17:30",
       "venue": "ביה\"ס מעיינות, רח' הצליל 8, פרדס חנה כרכור",
       "venueLink": "https://maps.app.goo.gl/ehjmqR18a53PCmG7A"
@@ -142,13 +142,13 @@
       "date": "Mar 12, 2026",
       "time": "17:00",
       "venue": "אולם פיס, רח' אבו נאר, בקה אל גרביה",
-      "venueLink": "https://maps.app.goo.gl/CXCdnSEeKeaHfAmw6"
+      "venueLink": "https://maps.app.goo.gl/6q2hsKtUVKiVEi3Y9"
     },
     {
       "type": "home",
       "team1": "PHK",
       "team1Suffix": "",
-      "team2": "הפועל מנשה",
+      "team2": "ה. מנשה",
       "team2Suffix": "",
       "score": "0:0",
       "date": "Mar 19, 2026",
@@ -158,7 +158,7 @@
     },
     {
       "type": "away",
-      "team1": "חריש/מי עמי",
+      "team1": "מ. חריש",
       "team1Suffix": "",
       "team2": "PHK",
       "team2Suffix": "",
@@ -166,7 +166,7 @@
       "date": "Apr 9, 2026",
       "time": "18:00",
       "venue": "אולם מי עמי",
-      "venueLink": "https://maps.app.goo.gl/9nswMy53ewZsotw49"
+      "venueLink": "https://maps.app.goo.gl/hkFF5vzcNjeXZa1Y9"
     },
     {
       "type": "away",
@@ -178,7 +178,7 @@
       "date": "Apr 30, 2026",
       "time": "17:30",
       "venue": "עמל מדעים ואומנויות, רח' באר אורה, חדרה",
-      "venueLink": "https://maps.app.goo.gl/m8q4aQNBStPApira8"
+      "venueLink": "https://maps.app.goo.gl/Dr9snWWXPb3CiG9B7"
     },
     {
       "type": "home",
@@ -190,11 +190,11 @@
       "date": "May 7, 2026",
       "time": "17:30",
       "venue": "ביה\"ס מעיינות, רח' הצליל 8, פרדס חנה כרכור",
-      "venueLink": "https://maps.app.goo.gl/NPCGk3zNpRzavnHc8"
+      "venueLink": "https://maps.app.goo.gl/sPk45jKCWLbH84at6"
     },
     {
       "type": "away",
-      "team1": "ג׳ת/בקה",
+      "team1": "מ. ג׳ת/בקה",
       "team1Suffix": "",
       "team2": "PHK",
       "team2Suffix": "",
@@ -202,13 +202,13 @@
       "date": "May 14, 2026",
       "time": "17:30",
       "venue": "ביה\"ס אל פארוק, ג'ת",
-      "venueLink": "https://maps.app.goo.gl/jvx8XhCxi39UhfEY9"
+      "venueLink": "https://maps.app.goo.gl/yypXRgHd4bxZbo8X9"
     },
     {
       "type": "home",
       "team1": "PHK",
       "team1Suffix": "",
-      "team2": "הפועל חריש",
+      "team2": "ה. חריש",
       "team2Suffix": "",
       "score": "0:0",
       "date": "Jun 4, 2026",
