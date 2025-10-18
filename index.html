@@ -158,11 +158,10 @@
         }
 
         .score {
-            font-size: 72px;
-            font-weight: 700;
-            letter-spacing: 2px;
-            text-align: center;
-        }
+  font-size: clamp(32px, 8vw, 72px);
+  line-height: 1.1;
+  font-weight: 700;
+}
 
         .game-date {
             font-size: 18px;
@@ -443,8 +442,10 @@
             }
 
             .score {
-                font-size: 35px;
-            }
+  font-size: clamp(32px, 8vw, 72px);
+  line-height: 1.1;
+  font-weight: 700;
+}
 
             .game-date {
                 font-size: 16px;
@@ -511,8 +512,10 @@
             }
 
             .score {
-                font-size: 28px;
-            }
+  font-size: clamp(32px, 8vw, 72px);
+  line-height: 1.1;
+  font-weight: 700;
+}
 
             .game-date {
                 font-size: 14px;
@@ -564,11 +567,10 @@
             font-weight: 700;
         }
 .score {
-            font-size: 72px;
-            font-weight: 700;
-            letter-spacing: 2px;
-            text-align: center;
-        }
+  font-size: clamp(32px, 8vw, 72px);
+  line-height: 1.1;
+  font-weight: 700;
+}
 .game-number {
             font-size: 24px;
             font-weight: 400;
@@ -595,6 +597,70 @@
     font-weight: 700;
   }
 }
+}
+
+
+/* ===================== Responsive Typography ===================== */
+/* Tablet and small laptops */
+@media (max-width: 768px) {
+  .teams { gap: 20px; }
+  .team, .team.hebrew { 
+    font-size: 56px; 
+    line-height: 1.1;
+  }
+  .score {
+  font-size: clamp(32px, 8vw, 72px);
+  line-height: 1.1;
+  font-weight: 700;
+}
+  .game-number { 
+    font-size: 20px; /* was 24 on desktop */
+  }
+  .game-date, .venue { 
+    font-size: 14px;
+  }
+}
+
+/* Phones */
+@media (max-width: 480px) {
+  .teams { gap: 14px; }
+  .team, .team.hebrew { 
+    font-size: 44px; 
+    line-height: 1.05;
+  }
+  .score {
+  font-size: clamp(32px, 8vw, 72px);
+  line-height: 1.1;
+  font-weight: 700;
+}
+  .game-number { 
+    font-size: 18px;
+  }
+  .game-date, .venue { 
+    font-size: 13px;
+  }
+}
+
+
+/* ===================== Fluid Responsive Typography ===================== */
+.team, .team.hebrew {
+  font-size: clamp(32px, 8vw, 72px);
+  line-height: 1.1;
+  font-weight: 700;
+}
+
+.score {
+  font-size: clamp(32px, 8vw, 72px);
+  line-height: 1.1;
+  font-weight: 700;
+}
+
+.game-number {
+  font-size: clamp(16px, 3vw, 24px);
+}
+
+.game-date, .venue {
+  font-size: clamp(12px, 2.2vw, 16px);
 }
 
 </style>
