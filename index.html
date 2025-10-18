@@ -381,13 +381,15 @@
             background: #555;
         }
 
-        @media (max-width: 768px) {
-            .league-switcher {
-                top: 12px;
-                left: 12px;
-                font-size: 14px;
-                padding: 8px 12px;
-            }
+        
+@media (max-width: 768px) {
+  .logo {
+    width: 180px;
+    height: 180px;
+    margin: 0 auto 30px; /* increased bottom margin for better spacing */
+  }
+}
+
             .logo {
                 width: 80px;
                 height: 80px;
@@ -506,6 +508,14 @@
   opacity: 0;
   transform: translateY(-8px);
   pointer-events: none;
+}
+
+
+@media (max-width: 768px) {
+  .logo {
+    width: 180px;
+    height: 180px;
+  }
 }
 
 </style>
