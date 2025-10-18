@@ -55,18 +55,26 @@
             position: fixed;
             top: 20px;
             left: 20px;
-            width: 40px;
-            height: 40px;
-            background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgdmlld0JveD0iMCAwIDUxMiA1MTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxlbGxpcHNlIGN4PSI3NC41IiBjeT0iMjU2IiByeD0iNjQuNSIgcnk9IjE2MCIgZmlsbD0idXJsKCNwYWludDBfbGluZWFyKSIvPgo8ZWxsaXBzZSBjeD0iMTU2IiBjeT0iMjU2IiByeD0iODQiIHJ5PSIyMjQiIGZpbGw9InVybCgjcGFpbnQxX2xpbmVhcikiLz4KPGVsbGlwc2UgY3g9IjI1NiIgY3k9IjI1NiIgcng9Ijk2IiByeT0iMjU2IiBmaWxsPSJ1cmwoI3BhaW50Ml9saW5lYXIpIi8+CjxlbGxpcHNlIGN4PSIzNTYiIGN5PSIyNTYiIHJ4PSI4NCIgcnk9IjIyNCIgZmlsbD0idXJsKCNwYWludDNfbGluZWFyKSIvPgo8ZWxsaXBzZSBjeD0iNDM3LjUiIGN5PSIyNTYiIHJ4PSI2NC41IiByeT0iMTYwIiBmaWxsPSJ1cmwoI3BhaW50NF9saW5lYXIpIi8+CjxkZWZzPgo8bGluZWFyR3JhZGllbnQgaWQ9InBhaW50MF9saW5lYXIiIHgxPSI3NC41IiB5MT0iOTYiIHgyPSI3NC41IiB5Mj0iNDE2IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+CjxzdG9wIHN0b3AtY29sb3I9IiNFQzQ0MzUiLz4KPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjRTM3MzJFIi8+CjwvbGluZWFyR3JhZGllbnQ+CjxsaW5lYXJHcmFkaWVudCBpZD0icGFpbnQxX2xpbmVhciIgeDE9IjE1NiIgeTE9IjMyIiB4Mj0iMTU2IiB5Mj0iNDgwIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+CjxzdG9wIHN0b3AtY29sb3I9IiNFQzQ0MzUiLz4KPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjRTM3MzJFIi8+CjwvbGluZWFyR3JhZGllbnQ+CjxsaW5lYXJHcmFkaWVudCBpZD0icGFpbnQyX2xpbmVhciIgeDE9IjI1NiIgeTE9IjAiIHgyPSIyNTYiIHkyPSI1MTIiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj4KPHN0b3Agc3RvcC1jb2xvcj0iI0VDNDQzNSIvPgo8c3RvcCBvZmZzZXQ9IjAuNSIgc3RvcC1jb2xvcj0iI0Y1N0MyRCIvPgo8c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNGQkJDMDUiLz4KPC9saW5lYXJHcmFkaWVudD4KPGxpbmVhckdyYWRpZW50IGlkPSJwYWludDNfbGluZWFyIiB4MT0iMzU2IiB5MT0iMzIiIHgyPSIzNTYiIHkyPSI0ODAiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj4KPHN0b3Agc3RvcC1jb2xvcj0iI0Y1N0MyRCIvPgo8c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNGQkJDMDUiLz4KPC9saW5lYXJHcmFkaWVudD4KPGxpbmVhckdyYWRpZW50IGlkPSJwYWludDRfbGluZWFyIiB4MT0iNDM3LjUiIHkxPSI5NiIgeDI9IjQzNy41IiB5Mj0iNDE2IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+CjxzdG9wIHN0b3AtY29sb3I9IiNGNTdDMkQiLz4KPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjRkJCQzA1Ii8+CjwvbGluZWFyR3JhZGllbnQ+CjwvZGVmcz4KPC9zdmc+') center/contain no-repeat;
             border: none;
-            border-radius: 50%;
+            border-radius: 9999px;
             cursor: pointer;
             z-index: 1000;
-            transition: transform 0.2s;
+            transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+            font-family: 'Lunasima', sans-serif;
+            font-weight: 700;
+            font-size: 16px;
+            line-height: 1;
+            padding: 10px 16px;
+            background: #0066cc;
+            color: #fff;
+            direction: rtl; /* Hebrew-friendly */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
 
         .league-switcher:hover {
-            transform: scale(1.1);
+            transform: scale(1.05);
+            background: #0052a3;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.25);
         }
 
         .games-container {
@@ -368,6 +376,12 @@
         }
 
         @media (max-width: 768px) {
+            .league-switcher {
+                top: 12px;
+                left: 12px;
+                font-size: 14px;
+                padding: 8px 12px;
+            }
             .logo {
                 width: 80px;
                 height: 80px;
@@ -480,7 +494,7 @@
     </style>
 </head>
 <body>
-    <button class="league-switcher" onclick="switchLeague()" title="Switch League"></button>
+    <button class="league-switcher" onclick="switchLeague()" title="החלפת ליגה" aria-label="החלפת ליגה">ליגות&gt;</button>
     <button class="admin-toggle" onclick="toggleAdminMode()">Admin Mode: OFF</button>
     <button class="export-btn" id="exportBtn" style="display: none;" onclick="exportData()">📥 Export JSON</button>
     <button class="add-game-btn" id="addGameBtn" style="display: none;" onclick="addNewGame()">+ Add Game</button>
