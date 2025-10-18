@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="ליגות כדורסל — תוצאות, משחקים ושיבוצים">
+<link rel="icon" type="image/png" href="favicon.png">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PHK Basketball Schedule 2025/2026</title>
@@ -401,13 +407,13 @@
   }
 }
   .header {
-    padding: 45px 24px; /* 50% increase from 30px 16px */
+    padding: 45px 24px; 
   }
   .header .league-name {
-    font-size: 1.5em; /* enlarge text */
+    font-size: 1.5em; 
   }
   .header .season-title {
-    font-size: 1.2em; /* enlarge secondary text */
+    font-size: 1.2em; 
   }
 }
 
@@ -428,8 +434,9 @@
             }
 
             .team {
-                font-size: 35px;
-            }
+            font-size: 72px;
+            font-weight: 700;
+        }
 
             .team.hebrew {
                 font-size: 35px;
@@ -444,8 +451,12 @@
             }
 
             .game-number {
-                font-size: 16px;
-            }
+            font-size: 18px;
+            font-weight: 400;
+            margin-top: 15px;
+            color: #ffffff;
+            line-height: 1.5;
+        }
 
             .venue {
                 font-size: 16px;
@@ -491,12 +502,9 @@
             }
 
             .team {
-                font-size: 28px;
-                word-break: break-word;
-                overflow-wrap: break-word;
-                max-width: 100%;
-                line-height: 1.2;
-            }
+            font-size: 72px;
+            font-weight: 700;
+        }
 
             .team.hebrew {
                 font-size: 28px;
@@ -511,8 +519,12 @@
             }
 
             .game-number {
-                font-size: 14px;
-            }
+            font-size: 18px;
+            font-weight: 400;
+            margin-top: 15px;
+            color: #ffffff;
+            line-height: 1.5;
+        }
 
             .venue {
                 font-size: 14px;
@@ -523,7 +535,7 @@
             }
         }
     
-/* Smooth hide/show on scroll (no color/position changes) */
+
 .league-switcher {
   transition: opacity 180ms ease, transform 180ms ease;
 }
@@ -533,12 +545,56 @@
   pointer-events: none;
 }
 
-
 @media (max-width: 768px) {
   .logo {
     width: 180px;
     height: 180px;
   }
+}
+
+.teams {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            width: 100%;
+            gap: 28px;
+        }
+.team {
+            font-size: 72px;
+            font-weight: 700;
+        }
+.score {
+            font-size: 72px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-align: center;
+        }
+.game-number {
+            font-size: 24px;
+            font-weight: 400;
+            margin-top: 15px;
+            color: #ffffff;
+            line-height: 1.5;
+        }
+.game-date {
+            font-size: 18px;
+            font-weight: 500;
+            margin-top: 10px;
+            color: #ffffff;
+            line-height: 1.5;
+        }
+
+.team.hebrew { 
+  font-size: 84px; 
+  font-weight: 700;
+}
+
+@media (max-width: 768px) {
+  .team.hebrew {
+    font-size: 72px;
+    font-weight: 700;
+  }
+}
 }
 
 </style>
