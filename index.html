@@ -676,6 +676,43 @@
   }
 }
 
+
+/* ====== Ultra-targeted phone optimizations (iPhone + Samsung common widths) ====== */
+/* General: prevent awkward wraps on very narrow screens */
+@media (max-width: 430px) {
+  .teams { gap: 10px; }
+  .team, .team.hebrew, .score { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+}
+
+/* Many modern Android (e.g., Galaxy S21/S22/S23): 412px */
+@media (max-width: 412px) {
+  body { padding-left: 6px; padding-right: 6px; }
+  .teams { gap: 10px; }
+  .team, .team.hebrew { font-size: clamp(28px, 8vw, 72px); }
+  .score { font-size: clamp(28px, 8vw, 72px); }
+  .game-number { font-size: 16px; }
+  .game-date, .venue { font-size: 12px; }
+}
+
+/* iPhone 15 (393px) and similar */
+@media (max-width: 393px) {
+  body { padding-left: 6px; padding-right: 6px; }
+  .teams { gap: 8px; }
+  .team, .team.hebrew { font-size: clamp(26px, 8.2vw, 72px); }
+  .score { font-size: clamp(26px, 8.2vw, 72px); }
+  .game-number { font-size: 15px; }
+  .game-date, .venue { font-size: 12px; }
+}
+
+/* Small Androids (360px) */
+@media (max-width: 360px) {
+  .teams { gap: 6px; }
+  .team, .team.hebrew { font-size: clamp(24px, 9vw, 72px); }
+  .score { font-size: clamp(24px, 9vw, 72px); }
+  .game-number { font-size: 14px; }
+  .game-date, .venue { font-size: 11px; }
+}
+
 </style>
 </head>
 <body>
