@@ -2,10 +2,15 @@
 <html lang="en">
 <head>
 
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="ליגות כדורסל — תוצאות, משחקים ושיבוצים">
-<link rel="icon" type="image/png" href="favicon.png">
+<!-- PWA / Homescreen -->
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" sizes="180x180" href="icon-180x180.png">
+<link rel="apple-touch-icon" sizes="152x152" href="icon-152x152.png">
+<link rel="apple-touch-icon" sizes="120x120" href="icon-120x120.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#ffffff">
+
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,11 +36,10 @@
         }
 
         .logo {
-            width: 180px;
-            height: 180px;
-            margin: 0 auto 30px;
-        
-    transition: width 0.4s ease, height 0.4s ease;}
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 20px;
+        }
         
         .logo img {
             width: 100%;
@@ -59,36 +63,22 @@
         }
 
         .league-switcher {
-        position: fixed;
-        top: 20px;
-        left: 20px;
-        border: 2px solid #0066cc;
-        border-radius: 12px;
-        cursor: pointer;
-        z-index: 1000;
-        transition: transform 0.2s, box-shadow 0.2s, background 0.2s, color 0.2s;
-        font-family: 'Lunasima', sans-serif;
-        font-weight: 700;
-        font-size: 16px;
-        line-height: 1;
-        height: 32px;
-        width: 80px;
-        background: #ffffff;
-        color: #0066cc;
-        direction: rtl;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 6px;
-    }
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            width: 40px;
+            height: 40px;
+            background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgdmlld0JveD0iMCAwIDUxMiA1MTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxlbGxpcHNlIGN4PSI3NC41IiBjeT0iMjU2IiByeD0iNjQuNSIgcnk9IjE2MCIgZmlsbD0idXJsKCNwYWludDBfbGluZWFyKSIvPgo8ZWxsaXBzZSBjeD0iMTU2IiBjeT0iMjU2IiByeD0iODQiIHJ5PSIyMjQiIGZpbGw9InVybCgjcGFpbnQxX2xpbmVhcikiLz4KPGVsbGlwc2UgY3g9IjI1NiIgY3k9IjI1NiIgcng9Ijk2IiByeT0iMjU2IiBmaWxsPSJ1cmwoI3BhaW50Ml9saW5lYXIpIi8+CjxlbGxpcHNlIGN4PSIzNTYiIGN5PSIyNTYiIHJ4PSI4NCIgcnk9IjIyNCIgZmlsbD0idXJsKCNwYWludDNfbGluZWFyKSIvPgo8ZWxsaXBzZSBjeD0iNDM3LjUiIGN5PSIyNTYiIHJ4PSI2NC41IiByeT0iMTYwIiBmaWxsPSJ1cmwoI3BhaW50NF9saW5lYXIpIi8+CjxkZWZzPgo8bGluZWFyR3JhZGllbnQgaWQ9InBhaW50MF9saW5lYXIiIHgxPSI3NC41IiB5MT0iOTYiIHgyPSI3NC41IiB5Mj0iNDE2IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+CjxzdG9wIHN0b3AtY29sb3I9IiNFQzQ0MzUiLz4KPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjRTM3MzJFIi8+CjwvbGluZWFyR3JhZGllbnQ+CjxsaW5lYXJHcmFkaWVudCBpZD0icGFpbnQxX2xpbmVhciIgeDE9IjE1NiIgeTE9IjMyIiB4Mj0iMTU2IiB5Mj0iNDgwIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+CjxzdG9wIHN0b3AtY29sb3I9IiNFQzQ0MzUiLz4KPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjRTM3MzJFIi8+CjwvbGluZWFyR3JhZGllbnQ+CjxsaW5lYXJHcmFkaWVudCBpZD0icGFpbnQyX2xpbmVhciIgeDE9IjI1NiIgeTE9IjAiIHgyPSIyNTYiIHkyPSI1MTIiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj4KPHN0b3Agc3RvcC1jb2xvcj0iI0VDNDQzNSIvPgo8c3RvcCBvZmZzZXQ9IjAuNSIgc3RvcC1jb2xvcj0iI0Y1N0MyRCIvPgo8c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNGQkJDMDUiLz4KPC9saW5lYXJHcmFkaWVudD4KPGxpbmVhckdyYWRpZW50IGlkPSJwYWludDNfbGluZWFyIiB4MT0iMzU2IiB5MT0iMzIiIHgyPSIzNTYiIHkyPSI0ODAiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj4KPHN0b3Agc3RvcC1jb2xvcj0iI0Y1N0MyRCIvPgo8c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNGQkJDMDUiLz4KPC9saW5lYXJHcmFkaWVudD4KPGxpbmVhckdyYWRpZW50IGlkPSJwYWludDRfbGluZWFyIiB4MT0iNDM3LjUiIHkxPSI5NiIgeDI9IjQzNy41IiB5Mj0iNDE2IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+CjxzdG9wIHN0b3AtY29sb3I9IiNGNTdDMkQiLz4KPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjRkJCQzA1Ii8+CjwvbGluZWFyR3JhZGllbnQ+CjwvZGVmcz4KPC9zdmc+') center/contain no-repeat;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 1000;
+            transition: transform 0.2s;
+        }
 
         .league-switcher:hover {
-        transform: scale(1.05);
-        background: #f0f8ff;
-        color: #004c99;
-        box-shadow: 0 6px 14px rgba(0,0,0,0.15);
-    }
+            transform: scale(1.1);
+        }
 
         .games-container {
             width: 100%;
@@ -158,10 +148,11 @@
         }
 
         .score {
-  font-size: clamp(32px, 8vw, 72px);
-  line-height: 1.1;
-  font-weight: 700;
-}
+            font-size: 72px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-align: center;
+        }
 
         .game-date {
             font-size: 18px;
@@ -387,37 +378,7 @@
             background: #555;
         }
 
-        
-
-@media (max-width: 768px) {
-  .logo {
-    width: 180px;
-    height: 180px;
-    margin: 0 auto 30px;
-  }
-  .header {
-    padding: 45px 24px;
-  }
-  .header .league-name {
-    font-size: 1.5em;
-  }
-  .header .season-title {
-    font-size: 1.2em;
-  }
-}
-  .header {
-    padding: 45px 24px; 
-  }
-  .header .league-name {
-    font-size: 1.5em; 
-  }
-  .header .season-title {
-    font-size: 1.2em; 
-  }
-}
-
-}
-
+        @media (max-width: 768px) {
             .logo {
                 width: 80px;
                 height: 80px;
@@ -433,31 +394,24 @@
             }
 
             .team {
-            font-size: 72px;
-            font-weight: 700;
-        }
+                font-size: 35px;
+            }
 
             .team.hebrew {
                 font-size: 35px;
             }
 
             .score {
-  font-size: clamp(32px, 8vw, 72px);
-  line-height: 1.1;
-  font-weight: 700;
-}
+                font-size: 35px;
+            }
 
             .game-date {
                 font-size: 16px;
             }
 
             .game-number {
-            font-size: 18px;
-            font-weight: 400;
-            margin-top: 15px;
-            color: #ffffff;
-            line-height: 1.5;
-        }
+                font-size: 16px;
+            }
 
             .venue {
                 font-size: 16px;
@@ -503,31 +457,28 @@
             }
 
             .team {
-            font-size: 72px;
-            font-weight: 700;
-        }
+                font-size: 28px;
+                word-break: break-word;
+                overflow-wrap: break-word;
+                max-width: 100%;
+                line-height: 1.2;
+            }
 
             .team.hebrew {
                 font-size: 28px;
             }
 
             .score {
-  font-size: clamp(32px, 8vw, 72px);
-  line-height: 1.1;
-  font-weight: 700;
-}
+                font-size: 28px;
+            }
 
             .game-date {
                 font-size: 14px;
             }
 
             .game-number {
-            font-size: 18px;
-            font-weight: 400;
-            margin-top: 15px;
-            color: #ffffff;
-            line-height: 1.5;
-        }
+                font-size: 14px;
+            }
 
             .venue {
                 font-size: 14px;
@@ -537,197 +488,18 @@
                 font-size: 28px;
             }
         }
-    
-
-.league-switcher {
-  transition: opacity 180ms ease, transform 180ms ease;
-}
-.league-switcher--hidden {
-  opacity: 0;
-  transform: translateY(-8px);
-  pointer-events: none;
-}
-
-@media (max-width: 768px) {
-  .logo {
-    width: 180px;
-    height: 180px;
-  }
-}
-
-.teams {
-            display: grid;
-            grid-template-columns: 1fr auto 1fr;
-            align-items: center;
-            width: 100%;
-            gap: 28px;
-        }
-.team {
-            font-size: 72px;
-            font-weight: 700;
-        }
-.score {
-  font-size: clamp(32px, 8vw, 72px);
-  line-height: 1.1;
-  font-weight: 700;
-}
-.game-number {
-            font-size: 24px;
-            font-weight: 400;
-            margin-top: 15px;
-            color: #ffffff;
-            line-height: 1.5;
-        }
-.game-date {
-            font-size: 18px;
-            font-weight: 500;
-            margin-top: 10px;
-            color: #ffffff;
-            line-height: 1.5;
-        }
-
-.team.hebrew { 
-  font-size: 84px; 
-  font-weight: 700;
-}
-
-@media (max-width: 768px) {
-  .team.hebrew {
-    font-size: 72px;
-    font-weight: 700;
-  }
-}
-}
-
-
-/* ===================== Responsive Typography ===================== */
-/* Tablet and small laptops */
-@media (max-width: 768px) {
-  .teams { gap: 20px; }
-  .team, .team.hebrew { 
-    font-size: 56px; 
-    line-height: 1.1;
-  }
-  .score {
-  font-size: clamp(32px, 8vw, 72px);
-  line-height: 1.1;
-  font-weight: 700;
-}
-  .game-number { 
-    font-size: 20px; /* was 24 on desktop */
-  }
-  .game-date, .venue { 
-    font-size: 14px;
-  }
-}
-
-/* Phones */
-@media (max-width: 480px) {
-  .teams { gap: 14px; }
-  .team, .team.hebrew { 
-    font-size: 44px; 
-    line-height: 1.05;
-  }
-  .score {
-  font-size: clamp(32px, 8vw, 72px);
-  line-height: 1.1;
-  font-weight: 700;
-}
-  .game-number { 
-    font-size: 18px;
-  }
-  .game-date, .venue { 
-    font-size: 13px;
-  }
-}
-
-
-/* ===================== Fluid Responsive Typography ===================== */
-.team, .team.hebrew {
-  font-size: clamp(32px, 8vw, 72px);
-  line-height: 1.1;
-  font-weight: 700;
-}
-
-.score {
-  font-size: clamp(32px, 8vw, 72px);
-  line-height: 1.1;
-  font-weight: 700;
-}
-
-.game-number {
-  font-size: clamp(16px, 3vw, 24px);
-}
-
-.game-date, .venue {
-  font-size: clamp(12px, 2.2vw, 16px);
-}
-
-
-@media (max-width: 768px) {
-  body {
-    padding-left: 8px;
-    padding-right: 8px;
-    margin-left: 0;
-    margin-right: 0;
-  }
-  .teams {
-    gap: 12px;
-  }
-}
-
-
-/* ====== Ultra-targeted phone optimizations (iPhone + Samsung common widths) ====== */
-/* General: prevent awkward wraps on very narrow screens */
-@media (max-width: 430px) {
-  .teams { gap: 10px; }
-  .team, .team.hebrew, .score { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-}
-
-/* Many modern Android (e.g., Galaxy S21/S22/S23): 412px */
-@media (max-width: 412px) {
-  body { padding-left: 6px; padding-right: 6px; }
-  .teams { gap: 10px; }
-  .team, .team.hebrew { font-size: clamp(28px, 8vw, 72px); }
-  .score { font-size: clamp(28px, 8vw, 72px); }
-  .game-number { font-size: 16px; }
-  .game-date, .venue { font-size: 12px; }
-}
-
-/* iPhone 15 (393px) and similar */
-@media (max-width: 393px) {
-  body { padding-left: 6px; padding-right: 6px; }
-  .teams { gap: 8px; }
-  .team, .team.hebrew { font-size: clamp(26px, 8.2vw, 72px); }
-  .score { font-size: clamp(26px, 8.2vw, 72px); }
-  .game-number { font-size: 15px; }
-  .game-date, .venue { font-size: 12px; }
-}
-
-/* Small Androids (360px) */
-@media (max-width: 360px) {
-  .teams { gap: 6px; }
-  .team, .team.hebrew { font-size: clamp(24px, 9vw, 72px); }
-  .score { font-size: clamp(24px, 9vw, 72px); }
-  .game-number { font-size: 14px; }
-  .game-date, .venue { font-size: 11px; }
-}
-
-</style>
+    </style>
 </head>
 <body>
-    <button class="league-switcher" onclick="switchLeague()" title="החלפת ליגה" aria-label="החלפת ליגה">ליגות <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 15 16" fill="none">
-<path d="M10.9692 4.32324L5.43077 4.32324C2.98372 4.32324 1 6.30697 1 8.75401V8.9694" stroke="#1A6DFF" />
-<path d="M8.56271 0.999785L11.6957 4.13281L8.56271 7.26584" stroke="#1A6DFF" />
-<path d="M4.15577 12.0771L9.69423 12.0771C12.1413 12.0771 14.125 10.0934 14.125 7.64638V7.43099" stroke="#1A6DFF" />
-<path d="M6.56229 15.4006L3.42926 12.2676L6.56229 9.13455" stroke="#1A6DFF" />
-</svg></button>
+    <button class="league-switcher" onclick="switchLeague()" title="Switch League"></button>
     <button class="admin-toggle" onclick="toggleAdminMode()">Admin Mode: OFF</button>
     <button class="export-btn" id="exportBtn" style="display: none;" onclick="exportData()">📥 Export JSON</button>
     <button class="add-game-btn" id="addGameBtn" style="display: none;" onclick="addNewGame()">+ Add Game</button>
 
     <div class="header">
-        <div class="logo"><img src="logo.png" alt="PHK Logo"></div>
+        <div class="logo">
+            <img src="logo.png" alt="PHK Logo">
+        </div>
         <div class="league-name" id="leagueName">ילדים ב שומרון</div>
         <div class="season-title">GAME SEASON<br>2025/2026</div>
     </div>
@@ -1458,19 +1230,83 @@
     </script>
 
 <script>
-(function(){
-  const btn = document.querySelector('.league-switcher');
-  if (!btn) return;
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() { navigator.serviceWorker.register('./sw.js'); });
+}
+</script>
 
-  function update(){
-    const atTop = window.scrollY <= 0;
-    btn.classList.toggle('league-switcher--hidden', !atTop);
+
+<script>
+(function(){
+  const NARROW_MAX = 430; // only apply on narrow phones
+  const isNarrow = () => window.innerWidth <= NARROW_MAX;
+
+  const MIN_FONT = 20, SHRINK_STEP = 0.95, SAFE_ITER = 20, MIN_VISIBLE_CHARS = 9;
+
+  function fits(el){ return el.scrollWidth <= el.clientWidth; }
+
+  function ensureMinChars(el){
+    const sample = document.createElement('span');
+    sample.style.visibility = 'hidden';
+    sample.style.position = 'absolute';
+    sample.style.whiteSpace = 'nowrap';
+    sample.style.font = getComputedStyle(el).font;
+    sample.textContent = (/[֐-׿]/.test(el.textContent) ? 'מ' : 'W').repeat(MIN_VISIBLE_CHARS);
+    el.appendChild(sample);
+    const needed = sample.getBoundingClientRect().width;
+    const space = el.clientWidth;
+    el.removeChild(sample);
+    return needed <= space;
   }
 
-  // Initial
-  update();
-  // On scroll
-  window.addEventListener('scroll', update, { passive: true });
+  function fitCell(el){
+    let iter = 0;
+    let size = parseFloat(getComputedStyle(el).fontSize);
+    if (!size) return;
+    while (iter < SAFE_ITER && (!fits(el) || !ensureMinChars(el))){
+      size = Math.max(MIN_FONT, size * SHRINK_STEP);
+      el.style.fontSize = size + 'px';
+      iter++;
+      if (size <= MIN_FONT) break;
+    }
+  }
+
+  function equalizeScore(row){
+    const teams = row.querySelectorAll('.team');
+    const score = row.querySelector('.score');
+    if (teams.length < 2 || !score) return;
+    const l = parseFloat(getComputedStyle(teams[0]).fontSize);
+    const r = parseFloat(getComputedStyle(teams[1]).fontSize);
+    const avg = Math.round((l + r) / 2);
+    score.style.fontSize = avg + 'px';
+    score.style.lineHeight = '1.1';
+    score.style.fontWeight = '700';
+  }
+
+  function fitAll(){
+    if (!isNarrow()) return;
+    document.querySelectorAll('.game-strip .teams').forEach(row => {
+      const cells = row.querySelectorAll('.team, .score');
+      cells.forEach(el => el.style.fontSize = '');
+      row.querySelectorAll('.team').forEach(fitCell);
+      fitCell(row.querySelector('.score'));
+      equalizeScore(row);
+    });
+  }
+
+  function resetAll(){
+    document.querySelectorAll('.game-strip .teams .team, .game-strip .teams .score')
+      .forEach(el => el.style.fontSize = '');
+  }
+
+  window.addEventListener('load', () => { if (isNarrow()) fitAll(); });
+  window.addEventListener('resize', () => {
+    clearTimeout(window.__fitT);
+    window.__fitT = setTimeout(() => { isNarrow() ? fitAll() : resetAll(); }, 120);
+  });
+  window.addEventListener('orientationchange', () => setTimeout(() => { if (isNarrow()) fitAll(); }, 150));
+
+  window.__fitTeamsNow = () => { isNarrow() ? fitAll() : resetAll(); };
 })();
 </script>
 
