@@ -1,4 +1,4 @@
-<!-- PHK – Unified Final Build (2025-10-19) -->
+<!-- PHK – Final Build with Swap Icon (2025-10-19) -->
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
@@ -57,22 +57,23 @@
 
     /* Floating controls */
     .league-switcher{
-      position:fixed; left:12px; right:auto; top:12px;
-      display:flex; align-items:center; gap:6px;
-      height:34px; padding:0 12px; min-width:78px;
+      position:fixed; left:calc(env(safe-area-inset-left) + 12px); right:auto; top:calc(env(safe-area-inset-top) + 12px);
+      display:inline-flex; align-items:center; gap:8px;
+      height:36px; padding:0 12px; min-width:92px;
       background:#fff; color:var(--phk-blue);
       border:2px solid var(--phk-blue); border-radius:12px;
-      font-weight:700; font-size:14px; line-height:1; z-index:20;
+      font-weight:700; font-size:14px; line-height:1; z-index:30;
       box-shadow:var(--shadow);
       transition:transform .15s ease;
       background-image:none !important;
     }
+    .league-switcher img{ width:16px; height:16px; display:inline-block; }
     .league-switcher:hover,
     .league-switcher:focus-visible{ transform:scale(1.05); outline:none; }
     .league-switcher::before{ content:none !important; }
 
     .admin-toggle{
-      position:fixed; right:12px; left:auto; top:12px;
+      position:fixed; right:calc(env(safe-area-inset-right) + 12px); left:auto; top:calc(env(safe-area-inset-top) + 12px);
       background:var(--phk-blue); color:#fff; border:none;
       padding:10px 16px; border-radius:12px; font-weight:700; z-index:20;
       box-shadow:var(--shadow); font-size:14px;
@@ -80,11 +81,11 @@
     .admin-toggle:focus-visible{ outline:3px solid #b3d7ff; outline-offset:2px; }
 
     .export-btn, .add-game-btn{
-      position:fixed; right:16px; bottom:calc(16px + env(safe-area-inset-bottom));
+      position:fixed; right:calc(env(safe-area-inset-right) + 16px); bottom:calc(16px + env(safe-area-inset-bottom));
       border:none; border-radius:999px; padding:14px 18px; font-size:16px;
       box-shadow:var(--shadow); z-index:20; display:none;
     }
-    .export-btn{ background:#0d6efd; color:#fff; right:168px; }
+    .export-btn{ background:#0d6efd; color:#fff; right:calc(env(safe-area-inset-right) + 168px); }
     .export-btn:hover{ filter:brightness(.95); }
     .add-game-btn{ background:#28a745; color:#fff; }
     .add-game-btn:hover{ filter:brightness(.95); }
@@ -143,9 +144,9 @@
     .delete-btn{ inset-inline-end:90px; background:rgba(220,53,69,.9); border-color:rgba(220,53,69,1); }
     .delete-btn:hover{ filter:brightness(.95); }
 
-    /* Mobile: fixed 25px sizes */
+    /* Mobile: fixed 25px sizes and visible leagues button */
     @media (max-width:600px){
-      .league-switcher{ height:36px; padding:0 12px; font-size:14px; }
+      .league-switcher{ display:inline-flex; height:36px; padding:0 12px; font-size:14px; }
       .team, .score{ font-size:25px !important; }
       .teams{ gap:12px; }
       .game-strip{ padding:28px 12px; }
@@ -159,7 +160,7 @@
   </style>
 </head>
 <body>
-  <button class="league-switcher" onclick="switchLeague()" title="ליגות">ליגות</button>
+  <button class="league-switcher" onclick="switchLeague()" title="ליגות"><img src="swap.svg" alt="" aria-hidden="true" />ליגות</button>
   <button class="admin-toggle" onclick="toggleAdminMode()">Admin Mode: OFF</button>
   <button class="export-btn" id="exportBtn" onclick="exportData()">📥 Export JSON</button>
   <button class="add-game-btn" id="addGameBtn" onclick="addNewGame()">+ Add Game</button>
@@ -236,7 +237,7 @@
         leagueData['ב'].games = [{
           type:'home', team1:'PHK', team1Suffix:'S', team2:'PHK', team2Suffix:'', score:'0:0',
           date:'Nov 13, 2025', time:'17:30',
-          venue:'ביה"ס מעיינות, רח\' הצליל 8, פרדס חנה כרכור',
+          venue:'ביה\"ס מעיינות, רח\\' הצליל 8, פרדס חנה כרכור',
           venueLink:'https://maps.app.goo.gl/ehjmqR18a53PCmG7A'
         }];
         leagueData['א'].games = leagueData['ב'].games.slice();
@@ -346,7 +347,7 @@
       document.getElementById('editScore').value = '0:0';
       document.getElementById('editDate').value = '';
       document.getElementById('editTime').value = '';
-      document.getElementById('editVenue').value = 'ביה"ס מעיינות, רח\' הצליל 8, פרדס חנה כרכור';
+      document.getElementById('editVenue').value = 'ביה\"ס מעיינות, רח\\' הצליל 8, פרדס חנה כרכור';
       document.getElementById('editVenueLink').value = 'https://maps.app.goo.gl/ehjmqR18a53PCmG7A';
       document.getElementById('editModal').style.display = 'flex';
     }
