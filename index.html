@@ -187,16 +187,17 @@
 
       /* Improved mobile typography */
       .team, .score{ 
-        font-size:clamp(22px, 8vw, 32px) !important; 
+        font-size:clamp(20px, 6.5vw, 28px) !important; 
       }
       .teams{ 
-        gap:10px;
+        gap:8px;
       }
       .game-strip{ 
-        padding:clamp(24px, 6vw, 32px) 8px; 
+        padding:clamp(24px, 6vw, 32px) 6px; 
         min-height:auto;
       }
       .logo{ width:min(234px, 65vw); }
+      .score{ min-width:auto; }
       
       /* Better spacing for game info */
       .game-number{ margin-top:12px; font-size:clamp(13px, 3.5vw, 16px); }
@@ -215,38 +216,37 @@
 
     /* iPhone 14 Pro Max, 15 Pro Max, Galaxy S23 Ultra, Pixel 8 Pro */
     @media (max-width:430px){
-      .teams{ gap:9px; }
-      .team, .score{ font-size:clamp(23px, 7.8vw, 30px) !important; }
+      .teams{ gap:6px; }
+      .team, .score{ font-size:clamp(20px, 6.2vw, 27px) !important; }
     }
 
     /* iPhone 14 Pro, 15 Pro, Galaxy S23+, OnePlus 11 */
     @media (max-width:393px){
-      .teams{ gap:8px; }
-      .team, .score{ font-size:clamp(22px, 7.5vw, 28px) !important; }
-      .score{ min-width:auto; }
+      .teams{ gap:5px; }
+      .team, .score{ font-size:clamp(19px, 6vw, 26px) !important; }
     }
 
     /* iPhone 11, 12, 13, 14, 15, Galaxy S23, Pixel 8 */
     @media (max-width:390px){
-      .teams{ gap:7px; }
-      .team, .score{ font-size:clamp(21px, 7.2vw, 27px) !important; }
+      .teams{ gap:5px; }
+      .team, .score{ font-size:clamp(19px, 5.8vw, 25px) !important; }
     }
 
     /* Extra small screens - older iPhones, compact Androids */
     @media (max-width:375px){
       .team, .score{ 
-        font-size:clamp(20px, 7vw, 26px) !important; 
+        font-size:clamp(18px, 5.5vw, 24px) !important; 
       }
-      .teams{ gap:6px; }
-      .game-strip{ padding:20px 6px; }
+      .teams{ gap:4px; }
+      .game-strip{ padding:20px 4px; }
     }
 
     /* Very small screens */
     @media (max-width:360px){
       .team, .score{ 
-        font-size:clamp(19px, 6.5vw, 24px) !important; 
+        font-size:clamp(17px, 5.2vw, 22px) !important; 
       }
-      .teams{ gap:5px; }
+      .teams{ gap:4px; }
     }
 
     /* Landscape mobile optimization */
