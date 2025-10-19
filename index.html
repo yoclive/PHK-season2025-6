@@ -116,7 +116,19 @@
 
     /* Mobile: fixed 25px sizes and visible leagues button */
     @media (max-width:600px){
-      .league-switcher{ font-size: 24px; padding:6px 10px;  .league-switcher svg{ width:24px; height:24px; } }}
+      .league-switcher{ font-size: 24px; padding:6px 10px;  .league-switcher svg{ width:24px; height:24px; 
+      /* --- Mobile refinements --- */
+      .teams{ gap:12px; }
+      .team{ white-space:nowrap; min-width:9ch; }
+      .score{ min-width:auto; }
+      .game-strip{ padding:28px 8px; } /* 8px side gutters */
+      /* Titles +10% */
+      .league-name{ font-size:clamp(20px, 5vw, 31px); }
+      .season-title{ font-size:clamp(20px, 4.6vw, 29px); }
+      /* Game number +20% */
+      .game-number{ font-size:120%; }
+    
+    } }}
 
       .league-switcher{ display:inline-flex; height:36px; padding:0 12px; font-size:14px; }
       .team, .score{ font-size:25px !important; }
