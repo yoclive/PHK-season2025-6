@@ -36,29 +36,19 @@
       color:#000;
       position:relative;
     }
-    .logo{ width:min(260px, 55vw); aspect-ratio:1/1; margin:0 auto 20px; }
+    .logo{ width:min(338px, 71.5vw); aspect-ratio:1/1; margin:0 auto 20px; }
     .logo img{ width:100%; height:100%; object-fit:contain; }
     .league-name{ font-weight:700; color:var(--phk-blue); font-size:clamp(18px, 4.5vw, 28px); margin-bottom:6px; }
     .season-title{ text-transform:uppercase; line-height:1.2; font-weight:600; color:#000; font-size:clamp(18px, 4vw, 26px); }
 
     /* Floating controls */
-    .league-switcher{
-      position:fixed;
-      left:calc(env(safe-area-inset-left) + 12px); right:auto;
-      top:calc(env(safe-area-inset-top) + 12px);
-      display:inline-flex; align-items:center; gap:8px;
-      height:36px; padding:0 12px; min-width:92px;
-      background:#fff; color:var(--phk-blue);
-      border:2px solid var(--phk-blue); border-radius:12px;
-      font-weight:700; font-size:14px; line-height:1; z-index:9999;
-      box-shadow:var(--shadow);
-      transition:transform .15s ease;
-      background-image:none !important;
-    }
+    .league-switcher{ position:fixed; left:calc(env(safe-area-inset-left) + 12px); right:auto; top:calc(env(safe-area-inset-top) + 12px); display:inline-flex; align-items:center; gap:8px; background:transparent; border:0; box-shadow:none; color:var(--phk-blue); font-weight:800; font-size: 19.2px; line-height:1; padding:4px 8px; cursor:pointer; z-index:9999; text-decoration:none; transition:transform .12s ease, opacity .12s ease; }
+.league-switcher:hover{ transform:scale(1.06); opacity:.92; }
+.league-switcher:active{ transform:scale(0.98); opacity:.88; }
+.league-switcher:focus-visible{ outline:3px solid #b3d7ff; outline-offset:2px; }
+    .league-switcher svg{ width: 19.2px; height: 19.2px; flex:0 0 auto; }
     .league-switcher:hover, .league-switcher:focus-visible{ transform:scale(1.05); outline:none; }
-    .league-switcher::before{ content:none !important; } /* ensure no legacy icon */
-    .league-switcher svg{ width:16px; height:16px; display:inline-block; }
-
+    /* ensure no legacy icon */
     .admin-toggle{
       position:fixed;
       right:calc(env(safe-area-inset-right) + 12px); left:auto;
@@ -113,7 +103,7 @@
     }
 
     .game-date, .game-number, .venue{ font-size:clamp(12px, 3.5vw, 18px); margin-top:8px; }
-    .venue a{ color:#fff; text-decoration:underline; text-underline-offset:2px; }
+    .venue a{ color:#fff; text-decoration:none; }
 
     .edit-btn, .delete-btn{
       position:absolute; top:10px;
@@ -126,25 +116,18 @@
 
     /* Mobile: fixed 25px sizes and visible leagues button */
     @media (max-width:600px){
+      .league-switcher{ font-size: 19.2px; padding:6px 10px; }
+
       .league-switcher{ display:inline-flex; height:36px; padding:0 12px; font-size:14px; }
       .team, .score{ font-size:25px !important; }
       .teams{ gap:12px; }
       .game-strip{ padding:28px 12px; }
-      .logo{ width:180px; }
+      .logo{ width:234px; }
     }
   </style>
 </head>
 <body>
-  <button class="league-switcher" onclick="switchLeague()" title="ליגות">
-    <!-- Inline SWAP icon (no external file dependency) -->
-    <svg viewBox="0 0 15 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
-      <path d="M10.9692 4.32324H5.43077C2.98372 4.32324 1 6.30697 1 8.75401V8.9694" stroke="#1A6DFF"/>
-      <path d="M8.56271 0.999785L11.6957 4.13281L8.56271 7.26584" stroke="#1A6DFF"/>
-      <path d="M4.15577 12.0771H9.69423C12.1413 12.0771 14.125 10.0934 14.125 7.64638V7.43099" stroke="#1A6DFF"/>
-      <path d="M6.56229 15.4006L3.42926 12.2676L6.56229 9.13455" stroke="#1A6DFF"/>
-    </svg>
-    ליגות
-  </button>
+  <button class="league-switcher" onclick="switchLeague()" title="ליגות">ליגות<svg viewBox="0 0 15 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M10.9692 4.32324H5.43077C2.98372 4.32324 1 6.30697 1 8.75401V8.9694" stroke="#1A6DFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M8.56271 0.999785L11.6957 4.13281L8.56271 7.26584" stroke="#1A6DFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M4.15577 12.0771H9.69423C12.1413 12.0771 14.125 10.0934 14.125 7.64638V7.43099" stroke="#1A6DFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.56229 15.4006L3.42926 12.2676L6.56229 9.13455" stroke="#1A6DFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
   <button class="admin-toggle" onclick="toggleAdminMode()">Admin Mode: OFF</button>
   <button class="export-btn" id="exportBtn" onclick="exportData()">📥 Export JSON</button>
   <button class="add-game-btn" id="addGameBtn" onclick="addNewGame()">+ Add Game</button>
