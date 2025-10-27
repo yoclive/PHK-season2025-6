@@ -38,8 +38,10 @@
     }
     .logo{ width:min(338px, 71.5vw); aspect-ratio:1/1; margin:0 auto 20px; }
     .logo img{ width:100%; height:100%; object-fit:contain; }
-    .league-name{ font-weight:700; color:var(--phk-blue); font-size:clamp(18px, 4.5vw, 28px); margin-bottom:6px; }
+    .league-name{ font-weight:700; color:#000; font-size:clamp(18px, 4.5vw, 28px); margin-bottom:6px; }
     .season-title{ text-transform:uppercase; line-height:1.2; font-weight:600; color:#000; font-size:clamp(18px, 4vw, 26px); }
+    .season-title a{ color:var(--phk-blue); text-decoration:none; }
+    .season-title a:hover{ text-decoration:underline; }
 
     /* Floating controls */
     .league-switcher{ 
@@ -340,7 +342,7 @@
   <header class="header">
     <div class="logo"><img src="logo.png" alt="PHK Logo" id="logoImg" /></div>
     <div class="league-name" id="leagueName">ילדים ב׳ שומרון (מאמן שקד)</div>
-    <div class="season-title">GAME SEASON<br/>2025/2026</div>
+    <div class="season-title" id="seasonTitle"><a href="https://ibasketball.co.il/league/2025-357/" target="_blank" rel="noopener">GAME SEASON<br/>2025/2026</a></div>
   </header>
 
   <main class="games-container" id="gamesContainer" role="list"></main>
@@ -378,8 +380,16 @@
     let currentLeague = 'ב'; // 'ב' or 'א'
 
     const leagueData = {
-      'ב': { name: 'ילדים ב׳ שומרון (מאמן שקד)', games: [] },
-      'א': { name: 'קט סל א׳ (מאמן: יאיר/יותם)', games: [] }
+      'ב': { 
+        name: 'ילדים ב׳ שומרון (מאמן שקד)', 
+        games: [],
+        url: 'https://ibasketball.co.il/league/2025-357/'
+      },
+      'א': { 
+        name: 'קט סל א׳ (מאמן: יאיר)', 
+        games: [],
+        url: 'https://ibasketball.co.il/league/2025-560/'
+      }
     };
     let games = [];
 
@@ -422,6 +432,15 @@
           logoImg.src = 'logo2.png';
         } else {
           logoImg.src = 'logo.png';
+        }
+      }
+      
+      // Update season title URL based on league
+      const seasonTitle = document.getElementById('seasonTitle');
+      if(seasonTitle){
+        const link = seasonTitle.querySelector('a');
+        if(link){
+          link.href = leagueData[currentLeague].url;
         }
       }
     }
