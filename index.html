@@ -1,4 +1,4 @@
-<!-- PHK – Improved Mobile Responsiveness – 2025-10-19 -->
+<!-- PHK Basketball Schedule – Final Version with URL Parameters – 2025-10-27 -->
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
@@ -64,7 +64,7 @@
       z-index:9999; 
       text-decoration:none; 
       transition:transform .12s ease, opacity .12s ease;
-      min-height:44px; /* Better touch target */
+      min-height:44px;
     }
     .league-switcher:hover{ transform:scale(1.06); opacity:.92; }
     .league-switcher:active{ transform:scale(0.98); opacity:.88; }
@@ -85,7 +85,7 @@
       z-index:9999;
       box-shadow:var(--shadow); 
       font-size:14px;
-      min-height:44px; /* Better touch target */
+      min-height:44px;
     }
     .admin-toggle:focus-visible{ outline:3px solid #b3d7ff; outline-offset:2px; }
 
@@ -139,7 +139,7 @@
     }
     .team{
       font-weight:700;
-      font-size:80px;  /* Desktop fixed size */
+      font-size:80px;
       line-height:1.1;
       word-break:break-word;
       overflow-wrap:anywhere;
@@ -151,7 +151,7 @@
     .score{
       font-weight:800; 
       letter-spacing:1px;
-      font-size:80px;  /* Desktop fixed size */
+      font-size:80px;
       line-height:1.1; 
       min-width:160px;
       flex-shrink:0;
@@ -318,7 +318,7 @@
   </style>
 </head>
 <body>
-  <button class="league-switcher" onclick="switchLeague()" title="ליגות">
+  <button class="league-switcher" onclick="switchLeague()" title="ליגות" id="leagueSwitcher">
     <svg viewBox="0 0 15 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
       <path d="M10.9692 4.32324H5.43077C2.98372 4.32324 1 6.30697 1 8.75401V8.9694" stroke="#1A6DFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
       <path d="M8.56271 0.999785L11.6957 4.13281L8.56271 7.26584" stroke="#1A6DFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -377,6 +377,39 @@
     };
     let games = [];
 
+    // Get league from URL parameter
+    function getLeagueFromURL(){
+      const urlParams = new URLSearchParams(window.location.search);
+      const leagueParam = urlParams.get('league');
+      
+      // If URL has ?league=a or ?league=א, show league א
+      if(leagueParam === 'a' || leagueParam === 'א'){
+        return 'א';
+      }
+      // If URL has ?league=b or ?league=ב, show league ב
+      else if(leagueParam === 'b' || leagueParam === 'ב'){
+        return 'ב';
+      }
+      // Default to ב
+      return 'ב';
+    }
+
+    // Initialize league from URL on page load
+    currentLeague = getLeagueFromURL();
+
+    // Update the league switcher to navigate to other league URL
+    function updateLeagueSwitcher(){
+      const switcherBtn = document.getElementById('leagueSwitcher');
+      if(switcherBtn){
+        const otherLeague = currentLeague === 'ב' ? 'a' : 'b';
+        const otherLeagueName = currentLeague === 'ב' ? 'ליגה א' : 'ליגה ב';
+        switcherBtn.onclick = function(){
+          window.location.href = `?league=${otherLeague}`;
+        };
+        switcherBtn.title = `עבור ל${otherLeagueName}`;
+      }
+    }
+
     // Load from JSON with graceful fallback
     async function loadGamesFromJSON(){
       try{
@@ -406,6 +439,7 @@
 
       games = leagueData[currentLeague].games;
       document.getElementById('leagueName').textContent = leagueData[currentLeague].name;
+      updateLeagueSwitcher();
       renderGames();
     }
 
@@ -428,12 +462,9 @@
     }
 
     function switchLeague(){
-      leagueData[currentLeague].games = games;
-      currentLeague = currentLeague === 'ב' ? 'א' : 'ב';
-      games = leagueData[currentLeague].games;
-      document.getElementById('leagueName').textContent = leagueData[currentLeague].name;
-      saveGames();
-      renderGames();
+      // This function is now handled by URL navigation
+      const otherLeague = currentLeague === 'ב' ? 'a' : 'b';
+      window.location.href = `?league=${otherLeague}`;
     }
 
     function renderGames(){
