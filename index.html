@@ -169,6 +169,7 @@
     .venue{ font-size:clamp(12px, 3.5vw, 21.6px); margin-top:8px; }
     .venue a{ color:#fff; text-decoration:none; }
     .venue a:hover{ text-decoration:underline; }
+    .additions{ font-size:clamp(12px, 3.5vw, 21.6px); margin-top:8px; color:#ffd700; font-weight:600; }
 
     .edit-btn, .delete-btn{
       position:absolute; 
@@ -366,6 +367,7 @@
         <div class="form-group"><label>Time (e.g., 17:30):</label><input type="text" id="editTime" required /></div>
         <div class="form-group"><label>Venue Name:</label><input type="text" id="editVenue" required /></div>
         <div class="form-group"><label>Venue Google Maps Link:</label><input type="url" id="editVenueLink" required /></div>
+        <div class="form-group"><label>Additions (optional notes/messages):</label><input type="text" id="editAdditions" placeholder="לדוגמה: רעננה משפחת כהן או הערות נוספות" /></div>
 
         <div class="form-actions">
           <button type="submit" class="btn btn-primary">Save</button>
@@ -529,6 +531,7 @@
           <div class="game-number">GAME ${gameNumber}</div>
           <div class="game-date">${game.date} • ${game.time}</div>
           <div class="venue"><a href="${game.venueLink}" target="_blank" rel="noopener">${game.venue}</a></div>
+          ${game.additions ? `<div class="additions">${game.additions}</div>` : ''}
         `;
         container.appendChild(el);
       });
@@ -560,6 +563,7 @@
       document.getElementById('editTime').value = game.time || '';
       document.getElementById('editVenue').value = game.venue || '';
       document.getElementById('editVenueLink').value = game.venueLink || '';
+      document.getElementById('editAdditions').value = game.additions || '';
       document.getElementById('editModal').style.display = 'flex';
     }
 
@@ -576,6 +580,7 @@
       document.getElementById('editTime').value = '';
       document.getElementById('editVenue').value = 'ביה"ס מעיינות, רח\' הצליל 8, פרדס חנה כרכור';
       document.getElementById('editVenueLink').value = 'https://maps.app.goo.gl/ehjmqR18a53PCmG7A';
+      document.getElementById('editAdditions').value = '';
       document.getElementById('editModal').style.display = 'flex';
     }
 
@@ -602,7 +607,8 @@
         date: document.getElementById('editDate').value,
         time: document.getElementById('editTime').value,
         venue: document.getElementById('editVenue').value,
-        venueLink: document.getElementById('editVenueLink').value
+        venueLink: document.getElementById('editVenueLink').value,
+        additions: document.getElementById('editAdditions').value
       };
       
       if(index === -1){
