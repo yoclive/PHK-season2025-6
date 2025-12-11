@@ -172,10 +172,12 @@
     .additions{ font-size:clamp(12px, 3.5vw, 21.6px); margin-top:8px; color:#fff; font-weight:600; }
     
     .pizza-icon{ 
-      width:clamp(40px, 8vw, 60px); 
-      height:clamp(40px, 8vw, 60px); 
-      margin-top:12px; 
+      width:clamp(30px, 6vw, 50px); 
+      height:clamp(30px, 6vw, 50px); 
       display:inline-block;
+      vertical-align:middle;
+      margin-left:8px;
+      margin-right:8px;
     }
 
     .edit-btn, .delete-btn{
@@ -538,6 +540,7 @@
         
         // Check if PHK is winning
         let showPizza = false;
+        let pizzaPosition = ''; // 'left' or 'right'
         if(isPlayed && game.score && game.score !== '0:0'){
           const scores = game.score.split(':');
           const score1 = parseInt(scores[0]);
@@ -549,8 +552,10 @@
           
           if(isPHKTeam1 && score1 > score2){
             showPizza = true;
+            pizzaPosition = 'left';
           } else if(isPHKTeam2 && score2 > score1){
             showPizza = true;
+            pizzaPosition = 'right';
           }
         }
 
@@ -558,15 +563,20 @@
           ${adminMode ? `<button class="delete-btn" onclick="deleteGame(${index})">Delete</button>` : ''}
           ${adminMode ? `<button class="edit-btn" onclick="editGame(${index})">Edit</button>` : ''}
           <div class="teams">
-            <span class="${t1Class}">${game.team1}${game.team1Suffix ? `<span class="team-suffix">${game.team1Suffix}</span>` : ''}</span>
+            <span class="${t1Class}">
+              ${game.team1}${game.team1Suffix ? `<span class="team-suffix">${game.team1Suffix}</span>` : ''}
+              ${showPizza && pizzaPosition === 'left' ? `<img src="pizza.png" alt="Pizza" class="pizza-icon" />` : ''}
+            </span>
             <span class="score" aria-label="Score">${game.score || '0:0'}</span>
-            <span class="${t2Class}">${game.team2}${game.team2Suffix ? `<span class="team-suffix">${game.team2Suffix}</span>` : ''}</span>
+            <span class="${t2Class}">
+              ${showPizza && pizzaPosition === 'right' ? `<img src="pizza.png" alt="Pizza" class="pizza-icon" />` : ''}
+              ${game.team2}${game.team2Suffix ? `<span class="team-suffix">${game.team2Suffix}</span>` : ''}
+            </span>
           </div>
           <div class="game-number">GAME ${gameNumber}</div>
           <div class="game-date">${game.date} • ${game.time}</div>
           <div class="venue"><a href="${game.venueLink}" target="_blank" rel="noopener">${game.venue}</a></div>
           ${game.additions ? `<div class="additions">${game.additions}</div>` : ''}
-          ${showPizza ? `<img src="pizza.png" alt="Pizza" class="pizza-icon" />` : ''}
         `;
         container.appendChild(el);
       });
