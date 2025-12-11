@@ -42,7 +42,7 @@
       "type": "away",
       "team1": "ה.מנשה",
       "team1Suffix": "",
-      "team2": "PHK 🍕",
+      "team2": "PHK",
       "team2Suffix": "",
       "score": "74:60",
       "date": "Dec 11, 2025",
@@ -245,17 +245,18 @@
       "type": "away",
       "team1": "PHK",
       "team1Suffix": "",
-      "team2": "PHKשרת",
+      "team2": "PHKשרת 🍕 ",
       "team2Suffix": "",
       "score": "49:43",
       "date": "Nov 11, 2025",
       "time": "18:30",
       "venue": "ביה\"ס מעיינות, רח' הצליל 8, פרדס חנה כרכור",
-      "venueLink": "https://maps.app.goo.gl/KWBhmnmQ2STKR3aG9"
+      "venueLink": "https://maps.app.goo.gl/KWBhmnmQ2STKR3aG9",
+      "additions": ""
     },
     {
       "type": "home",
-      "team1": "PHKשרת",
+      "team1": "PHKשרת 🍕 ",
       "team1Suffix": "",
       "team2": "חדרה מרכז",
       "team2Suffix": "",
@@ -263,7 +264,8 @@
       "date": "Nov 25, 2025",
       "time": "18:30",
       "venue": "ביה\"ס מעיינות, רח' הצליל 8, פרדס חנה כרכור",
-      "venueLink": "https://maps.app.goo.gl/ehjmqR18a53PCmG7A"
+      "venueLink": "https://maps.app.goo.gl/ehjmqR18a53PCmG7A",
+      "additions": ""
     },
     {
       "type": "away",
