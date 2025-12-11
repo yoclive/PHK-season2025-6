@@ -559,27 +559,27 @@
           }
         }
 
-        // Display order: Away team (left) | Score | Home team (right)
-        // This matches the form: team1=Home, team2=Away
-        let leftTeam = game.team2;  // Away team on left
-        let rightTeam = game.team1; // Home team on right
+        // ALWAYS: Away team (left) | Score | Home team (right)
+        // team1 = Home team (always right side)
+        // team2 = Away team (always left side)
+        let leftTeam = game.team2;  // Away team on LEFT
+        let rightTeam = game.team1; // Home team on RIGHT
         let leftTeamClass = t2Class;
         let rightTeamClass = t1Class;
-        let leftSuffix = game.team2Suffix;
-        let rightSuffix = game.team1Suffix;
+        let leftSuffix = game.team2Suffix || '';
+        let rightSuffix = game.team1Suffix || '';
         
         let leftPizza = '', rightPizza = '';
         
-        // Pizza logic: check which team is PHK and if they won
+        // Pizza logic: 
+        // pizzaPosition 'left' means team1 (home/right) won
+        // pizzaPosition 'right' means team2 (away/left) won
         if(showPizza){
-          const isPHKTeam1 = String(game.team1).startsWith('PHK'); // team1 is home (right side)
-          const isPHKTeam2 = String(game.team2).startsWith('PHK'); // team2 is away (left side)
-          
-          if(isPHKTeam1 && pizzaPosition === 'left'){
-            // PHK is team1 (home/right) and won
+          if(pizzaPosition === 'left'){
+            // team1 (home team on RIGHT) won
             rightPizza = `<img src="pizza.png" alt="Pizza" class="pizza-icon" />`;
-          } else if(isPHKTeam2 && pizzaPosition === 'right'){
-            // PHK is team2 (away/left) and won
+          } else if(pizzaPosition === 'right'){
+            // team2 (away team on LEFT) won
             leftPizza = `<img src="pizza.png" alt="Pizza" class="pizza-icon" />`;
           }
         }
