@@ -559,35 +559,28 @@
           }
         }
 
-        // Determine display order based on game type
-        // For HOME games: Away team (left) | Score | Home team (right)
-        // For AWAY games: Home team (left) | Score | Away team (right)
-        let leftTeam, rightTeam, leftTeamClass, rightTeamClass;
+        // Display order: Away team (left) | Score | Home team (right)
+        // This matches the form: team1=Home, team2=Away
+        let leftTeam = game.team2;  // Away team on left
+        let rightTeam = game.team1; // Home team on right
+        let leftTeamClass = t2Class;
+        let rightTeamClass = t1Class;
+        let leftSuffix = game.team2Suffix;
+        let rightSuffix = game.team1Suffix;
+        
         let leftPizza = '', rightPizza = '';
         
-        if(game.type === 'home'){
-          // HOME game: PHK is home (right side)
-          leftTeam = game.team2;
-          leftTeamClass = t2Class;
-          rightTeam = game.team1;
-          rightTeamClass = t1Class;
-          if(showPizza && pizzaPosition === 'left'){
+        // Pizza logic: check which team is PHK and if they won
+        if(showPizza){
+          const isPHKTeam1 = String(game.team1).startsWith('PHK'); // team1 is home (right side)
+          const isPHKTeam2 = String(game.team2).startsWith('PHK'); // team2 is away (left side)
+          
+          if(isPHKTeam1 && pizzaPosition === 'left'){
+            // PHK is team1 (home/right) and won
             rightPizza = `<img src="pizza.png" alt="Pizza" class="pizza-icon" />`;
-          }
-          if(showPizza && pizzaPosition === 'right'){
+          } else if(isPHKTeam2 && pizzaPosition === 'right'){
+            // PHK is team2 (away/left) and won
             leftPizza = `<img src="pizza.png" alt="Pizza" class="pizza-icon" />`;
-          }
-        } else {
-          // AWAY game: PHK is away (left side), opponent is home (right side)
-          leftTeam = game.team1;
-          leftTeamClass = t1Class;
-          rightTeam = game.team2;
-          rightTeamClass = t2Class;
-          if(showPizza && pizzaPosition === 'left'){
-            leftPizza = `<img src="pizza.png" alt="Pizza" class="pizza-icon" />`;
-          }
-          if(showPizza && pizzaPosition === 'right'){
-            rightPizza = `<img src="pizza.png" alt="Pizza" class="pizza-icon" />`;
           }
         }
 
@@ -597,11 +590,11 @@
           <div class="teams">
             <span class="${leftTeamClass}">
               ${leftPizza}
-              ${leftTeam}${game.type === 'home' ? (game.team2Suffix ? `<span class="team-suffix">${game.team2Suffix}</span>` : '') : (game.team1Suffix ? `<span class="team-suffix">${game.team1Suffix}</span>` : '')}
+              ${leftTeam}${leftSuffix ? `<span class="team-suffix">${leftSuffix}</span>` : ''}
             </span>
             <span class="score" aria-label="Score">${game.score || '0:0'}</span>
             <span class="${rightTeamClass}">
-              ${rightTeam}${game.type === 'home' ? (game.team1Suffix ? `<span class="team-suffix">${game.team1Suffix}</span>` : '') : (game.team2Suffix ? `<span class="team-suffix">${game.team2Suffix}</span>` : '')}
+              ${rightTeam}${rightSuffix ? `<span class="team-suffix">${rightSuffix}</span>` : ''}
               ${rightPizza}
             </span>
           </div>
