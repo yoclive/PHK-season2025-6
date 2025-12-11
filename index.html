@@ -563,14 +563,14 @@
           ${adminMode ? `<button class="delete-btn" onclick="deleteGame(${index})">Delete</button>` : ''}
           ${adminMode ? `<button class="edit-btn" onclick="editGame(${index})">Edit</button>` : ''}
           <div class="teams">
-            <span class="${t1Class}">
-              ${game.team1}${game.team1Suffix ? `<span class="team-suffix">${game.team1Suffix}</span>` : ''}
-              ${showPizza && pizzaPosition === 'left' ? `<img src="pizza.png" alt="Pizza" class="pizza-icon" />` : ''}
-            </span>
-            <span class="score" aria-label="Score">${game.score || '0:0'}</span>
             <span class="${t2Class}">
               ${showPizza && pizzaPosition === 'right' ? `<img src="pizza.png" alt="Pizza" class="pizza-icon" />` : ''}
               ${game.team2}${game.team2Suffix ? `<span class="team-suffix">${game.team2Suffix}</span>` : ''}
+            </span>
+            <span class="score" aria-label="Score">${game.score || '0:0'}</span>
+            <span class="${t1Class}">
+              ${game.team1}${game.team1Suffix ? `<span class="team-suffix">${game.team1Suffix}</span>` : ''}
+              ${showPizza && pizzaPosition === 'left' ? `<img src="pizza.png" alt="Pizza" class="pizza-icon" />` : ''}
             </span>
           </div>
           <div class="game-number">GAME ${gameNumber}</div>
