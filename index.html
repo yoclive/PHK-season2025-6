@@ -559,27 +559,37 @@
           }
         }
 
-        // ALWAYS: Away team (left) | Score | Home team (right)
-        // team1 = Home team (always right side)
-        // team2 = Away team (always left side)
-        let leftTeam = game.team2;  // Away team on LEFT
-        let rightTeam = game.team1; // Home team on RIGHT
-        let leftTeamClass = t2Class;
-        let rightTeamClass = t1Class;
-        let leftSuffix = game.team2Suffix || '';
-        let rightSuffix = game.team1Suffix || '';
+        // Display logic based on game type:
+        // HOME games (blue): PHK is home, so PHK on RIGHT, opponent on LEFT
+        // AWAY games (black): PHK is away, so PHK on LEFT, opponent on RIGHT
         
+        let leftTeam, rightTeam, leftTeamClass, rightTeamClass, leftSuffix, rightSuffix;
         let leftPizza = '', rightPizza = '';
         
-        // Pizza logic: 
-        // pizzaPosition 'left' means team1 (home/right) won
-        // pizzaPosition 'right' means team2 (away/left) won
-        if(showPizza){
-          if(pizzaPosition === 'left'){
-            // team1 (home team on RIGHT) won
+        if(game.type === 'home'){
+          // BLUE background: PHK is HOME (right), opponent is away (left)
+          leftTeam = game.team2;      // Away opponent on left
+          rightTeam = game.team1;     // Home PHK on right
+          leftTeamClass = t2Class;
+          rightTeamClass = t1Class;
+          leftSuffix = game.team2Suffix || '';
+          rightSuffix = game.team1Suffix || '';
+          
+          // If PHK (team1) won, pizza goes on right
+          if(showPizza && pizzaPosition === 'left'){
             rightPizza = `<img src="pizza.png" alt="Pizza" class="pizza-icon" />`;
-          } else if(pizzaPosition === 'right'){
-            // team2 (away team on LEFT) won
+          }
+        } else {
+          // BLACK background: PHK is AWAY (left), opponent is home (right)
+          leftTeam = game.team1;      // Away PHK on left
+          rightTeam = game.team2;     // Home opponent on right
+          leftTeamClass = t1Class;
+          rightTeamClass = t2Class;
+          leftSuffix = game.team1Suffix || '';
+          rightSuffix = game.team2Suffix || '';
+          
+          // If PHK (team1) won, pizza goes on left
+          if(showPizza && pizzaPosition === 'left'){
             leftPizza = `<img src="pizza.png" alt="Pizza" class="pizza-icon" />`;
           }
         }
