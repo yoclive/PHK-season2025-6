@@ -1,1283 +1,743 @@
+<!-- PHK Basketball Schedule – Final Version with URL Parameters – 2025-10-27 -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="he" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PHK Basketball Schedule 2025/2026</title>
-    <link href="https://fonts.googleapis.com/css2?family=Lunasima:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>PHK Basketball Schedule 2025/2026</title>
 
-        body {
-            font-family: 'Lunasima', sans-serif;
-            background: #1a1a1a;
-            color: white;
-        }
+  <!-- PWA / Homescreen -->
+  <link rel="manifest" href="manifest.webmanifest" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="theme-color" content="#ffffff" />
 
-        .header {
-            text-align: center;
-            padding: 40px 20px;
-            background: white;
-        }
-
-        .logo {
-            width: 120px;
-            height: 120px;
-            margin: 0 auto 20px;
-        }
-        
-        .logo img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
-
-        .season-title {
-            font-size: 24px;
-            font-weight: 500;
-            color: #000;
-            text-transform: uppercase;
-            line-height: 1.3;
-        }
-
-        .league-name {
-            font-size: 23px;
-            font-weight: 700;
-            color: #0066cc;
-            margin-bottom: 10px;
-        }
-
-        .league-switcher {
-        position: fixed;
-        top: 20px;
-        left: 20px;
-        border: 2px solid #0066cc;
-        border-radius: 12px;
-        cursor: pointer;
-        z-index: 1000;
-        transition: transform 0.2s, box-shadow 0.2s, background 0.2s, color 0.2s;
-        font-family: 'Lunasima', sans-serif;
-        font-weight: 700;
-        font-size: 16px;
-        line-height: 1;
-        height: 32px;
-        width: 80px;
-        background: #ffffff;
-        color: #0066cc;
-        direction: rtl;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 6px;
+  <link href="https://fonts.googleapis.com/css2?family=Lunasima:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    :root{
+      --phk-blue:#0066cc;
+      --bg:#1a1a1a;
+      --text:#fff;
+      --shadow:0 4px 12px rgba(0,0,0,.25);
+    }
+    *{ box-sizing:border-box; }
+    html, body{ margin:0; padding:0; }
+    body{
+      font-family:'Lunasima', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      background:var(--bg);
+      color:var(--text);
     }
 
-        .league-switcher:hover {
-        transform: scale(1.05);
-        background: #f0f8ff;
-        color: #004c99;
-        box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+    /* Header */
+    .header{
+      text-align:center;
+      padding:clamp(24px, 4vw, 48px) 16px;
+      background:#fff;
+      color:#000;
+      position:relative;
     }
-
-        .games-container {
-            width: 100%;
-        }
-
-        .game-strip {
-            min-height: 200px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 40px 20px;
-            text-align: center;
-            position: relative;
-            border-bottom: 2px solid #ffffff;
-        }
-
-        .game-strip:first-child {
-            border-top: none;
-        }
-
-        .game-strip.home {
-            background: #0066cc;
-        }
-
-        .game-strip.away {
-            background: #000000;
-        }
-
-        .game-strip.home.played {
-            background: rgba(0, 102, 204, 0.8);
-        }
-
-        .game-strip.away.played {
-            background: rgba(0, 0, 0, 0.8);
-        }
-
-        .teams {
-            display: grid;
-            grid-template-columns: 1fr auto 1fr;
-            align-items: center;
-            width: 100%;
-            gap: 28px;
-        }
-
-        .team:first-child {
-            text-align: right;
-        }
-
-        .team:last-child {
-            text-align: left;
-        }
-
-        .team {
-            font-size: 72px;
-            font-weight: 700;
-        }
-
-        .team.hebrew {
-            font-family: 'Lunasima', sans-serif;
-            font-size: 72px;
-        }
-
-        .team-suffix {
-            font-size: 72px;
-            font-weight: 400;
-        }
-
-        .score {
-            font-size: 72px;
-            font-weight: 700;
-            letter-spacing: 2px;
-            text-align: center;
-        }
-
-        .game-date {
-            font-size: 18px;
-            font-weight: 500;
-            margin-top: 10px;
-            color: #ffffff;
-            line-height: 1.5;
-        }
-
-        .game-number {
-            font-size: 18px;
-            font-weight: 400;
-            margin-top: 15px;
-            color: #ffffff;
-            line-height: 1.5;
-        }
-
-        .venue {
-            font-size: 18px;
-            color: #ffffff;
-            margin-top: 5px;
-            line-height: 1.5;
-        }
-
-        .venue a {
-            color: #ffffff;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .venue a:hover {
-            color: #ffffff;
-            text-decoration: underline;
-        }
-
-        .venue a[href*="ehjmqR18a53PCmG7A"],
-        .venue a[href*="4RPqDeETMmXyAPwX7"] {
-            font-family: 'Lunasima', sans-serif;
-        }
-
-        .edit-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: rgba(255, 255, 255, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            color: white;
-            padding: 8px 16px;
-            cursor: pointer;
-            border-radius: 4px;
-            font-size: 14px;
-            font-family: 'Lunasima', sans-serif;
-        }
-
-        .edit-btn:hover {
-            background: rgba(255, 255, 255, 0.3);
-        }
-
-        .delete-btn {
-            position: absolute;
-            top: 10px;
-            right: 80px;
-            background: rgba(220, 53, 69, 0.8);
-            border: 1px solid rgba(220, 53, 69, 1);
-            color: white;
-            padding: 8px 16px;
-            cursor: pointer;
-            border-radius: 4px;
-            font-size: 14px;
-            font-family: 'Lunasima', sans-serif;
-        }
-
-        .delete-btn:hover {
-            background: rgba(220, 53, 69, 1);
-        }
-
-        .add-game-btn {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: #28a745;
-            color: white;
-            border: none;
-            padding: 16px 24px;
-            border-radius: 50px;
-            cursor: pointer;
-            font-size: 18px;
-            font-family: 'Lunasima', sans-serif;
-            z-index: 1000;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-        }
-
-        .add-game-btn:hover {
-            background: #218838;
-            transform: scale(1.05);
-        }
-
-        .export-btn {
-            position: fixed;
-            bottom: 20px;
-            right: 160px;
-            background: #007bff;
-            color: white;
-            border: none;
-            padding: 16px 24px;
-            border-radius: 50px;
-            cursor: pointer;
-            font-size: 18px;
-            font-family: 'Lunasima', sans-serif;
-            z-index: 1000;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-        }
-
-        .export-btn:hover {
-            background: #0056b3;
-            transform: scale(1.05);
-        }
-
-        .admin-toggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: #0066cc;
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-            font-family: 'Lunasima', sans-serif;
-            z-index: 1000;
-        }
-
-        .admin-toggle:hover {
-            background: #0052a3;
-        }
-
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 2000;
-            overflow-y: auto;
-        }
-
-        .modal.active {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal-content {
-            background: white;
-            padding: 30px;
-            border-radius: 8px;
-            max-width: 600px;
-            width: 90%;
-            color: black;
-            max-height: 90vh;
-            overflow-y: auto;
-        }
-
-        .modal-content h2 {
-            margin-bottom: 20px;
-            color: #333;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: 500;
-            color: #333;
-        }
-
-        .form-group input,
-        .form-group select {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 16px;
-            font-family: 'Lunasima', sans-serif;
-        }
-
-        .form-actions {
-            display: flex;
-            gap: 10px;
-            margin-top: 20px;
-        }
-
-        .btn {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-            font-family: 'Lunasima', sans-serif;
-        }
-
-        .btn-primary {
-            background: #0066cc;
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background: #0052a3;
-        }
-
-        .btn-secondary {
-            background: #666;
-            color: white;
-        }
-
-        .btn-secondary:hover {
-            background: #555;
-        }
-
-        
-@media (max-width: 768px) {
-  .logo {
-    width: 180px;
-    height: 180px;
-    margin: 0 auto 30px; /* increased bottom margin for better spacing */
-  }
-}
-
-            .logo {
-                width: 80px;
-                height: 80px;
-            }
-
-            .season-title {
-                font-size: 28px;
-                padding: 0 16px;
-            }
-
-            .game-strip {
-                padding: 40px 16px;
-            }
-
-            .team {
-                font-size: 35px;
-            }
-
-            .team.hebrew {
-                font-size: 35px;
-            }
-
-            .score {
-                font-size: 35px;
-            }
-
-            .game-date {
-                font-size: 16px;
-            }
-
-            .game-number {
-                font-size: 16px;
-            }
-
-            .venue {
-                font-size: 16px;
-            }
-
-            .teams {
-                gap: 14px;
-            }
-
-            .team-suffix {
-                font-size: 35px;
-            }
-
-            .admin-toggle {
-                top: 10px;
-                right: 10px;
-                padding: 8px 16px;
-                font-size: 14px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .header {
-                padding: 30px 16px;
-            }
-
-            .logo {
-                width: 70px;
-                height: 70px;
-            }
-
-            .season-title {
-                font-size: 28px;
-                padding: 0 16px;
-            }
-
-            .game-strip {
-                padding: 40px 16px;
-            }
-
-            .teams {
-                align-items: baseline;
-            }
-
-            .team {
-                font-size: 28px;
-                word-break: break-word;
-                overflow-wrap: break-word;
-                max-width: 100%;
-                line-height: 1.2;
-            }
-
-            .team.hebrew {
-                font-size: 28px;
-            }
-
-            .score {
-                font-size: 28px;
-            }
-
-            .game-date {
-                font-size: 14px;
-            }
-
-            .game-number {
-                font-size: 14px;
-            }
-
-            .venue {
-                font-size: 14px;
-            }
-
-            .team-suffix {
-                font-size: 28px;
-            }
-        }
+    .logo{ width:min(338px, 71.5vw); aspect-ratio:1/1; margin:0 auto 20px; }
+    .logo img{ width:100%; height:100%; object-fit:contain; }
+    .league-name{ font-weight:700; color:#000; font-size:clamp(18px, 4.5vw, 28px); margin-bottom:6px; }
+    .season-title{ text-transform:uppercase; line-height:1.2; font-weight:600; color:#000; font-size:clamp(18px, 4vw, 26px); }
+    .season-title a{ color:var(--phk-blue); text-decoration:none; }
+    .season-title a:hover{ text-decoration:underline; }
+
+    /* Floating controls */
+    .league-switcher{ 
+      position:fixed; 
+      left:calc(env(safe-area-inset-left) + 12px); 
+      right:auto; 
+      top:calc(env(safe-area-inset-top) + 12px); 
+      display:inline-flex; 
+      align-items:center; 
+      gap:8px; 
+      background:rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border:0; 
+      box-shadow:0 2px 8px rgba(0,0,0,0.15); 
+      color:var(--phk-blue); 
+      font-weight:800; 
+      font-size: 16px; 
+      line-height:1; 
+      padding:10px 14px; 
+      border-radius:12px;
+      cursor:pointer; 
+      z-index:9999; 
+      text-decoration:none; 
+      transition:transform .12s ease, opacity .12s ease;
+      min-height:44px;
+    }
+    .league-switcher:hover{ transform:scale(1.06); opacity:.92; }
+    .league-switcher:active{ transform:scale(0.98); opacity:.88; }
+    .league-switcher:focus-visible{ outline:3px solid #b3d7ff; outline-offset:2px; }
+    .league-switcher svg{ width: 18px; height: 18px; flex:0 0 auto; }
     
-/* Smooth hide/show on scroll (no color/position changes) */
-.league-switcher {
-  transition: opacity 180ms ease, transform 180ms ease;
-}
-.league-switcher--hidden {
-  opacity: 0;
-  transform: translateY(-8px);
-  pointer-events: none;
-}
+    .admin-toggle{
+      position:fixed;
+      right:calc(env(safe-area-inset-right) + 12px); 
+      left:auto;
+      top:calc(env(safe-area-inset-top) + 12px);
+      background:var(--phk-blue); 
+      color:#fff; 
+      border:none;
+      padding:10px 16px; 
+      border-radius:12px; 
+      font-weight:700; 
+      z-index:9999;
+      box-shadow:var(--shadow); 
+      font-size:14px;
+      min-height:44px;
+    }
+    .admin-toggle:focus-visible{ outline:3px solid #b3d7ff; outline-offset:2px; }
 
+    .export-btn, .add-game-btn{
+      position:fixed; 
+      right:calc(env(safe-area-inset-right) + 16px); 
+      bottom:calc(16px + env(safe-area-inset-bottom));
+      border:none; 
+      border-radius:999px; 
+      padding:14px 18px; 
+      font-size:16px;
+      box-shadow:var(--shadow); 
+      z-index:20; 
+      display:none;
+      min-height:44px;
+    }
+    .export-btn{ background:#0d6efd; color:#fff; right:calc(env(safe-area-inset-right) + 168px); }
+    .export-btn:hover{ filter:brightness(.95); }
+    .add-game-btn{ background:#28a745; color:#fff; }
+    .add-game-btn:hover{ filter:brightness(.95); }
 
-@media (max-width: 768px) {
-  .logo {
-    width: 180px;
-    height: 180px;
-  }
-}
+    /* Games list – full bleed */
+    .games-container{ width:100vw; max-width:100vw; margin:0; padding:0; }
+    .game-strip{
+      width:100vw;
+      margin-left:calc(50% - 50vw);
+      margin-right:calc(50% - 50vw);
+      min-height:184px;
+      display:flex; 
+      flex-direction:column; 
+      justify-content:center; 
+      align-items:center;
+      padding:36px 16px; 
+      text-align:center; 
+      position:relative;
+      border-bottom:2px solid #fff;
+    }
+    .game-strip.home{ background:#0066cc; }
+    .game-strip.away{ background:#000; }
+    .game-strip.played{ opacity:0.5; }
+    .game-strip.played.home{ background:#045db7; }
+    .game-strip.played.away{ background:#111; }
 
-</style>
+    .teams{ 
+      display:grid; 
+      grid-template-columns:1fr auto 1fr; 
+      align-items:center; 
+      gap:28px; 
+      width:100%; 
+      max-width:100%;
+    }
+    .team{
+      font-weight:700;
+      font-size:80px;
+      line-height:1.1;
+      word-break:break-word;
+      overflow-wrap:anywhere;
+      hyphens:auto;
+    }
+    .team:first-child{ text-align:end; }
+    .team:last-child{ text-align:start; }
+    .team.hebrew{ direction:rtl; }
+    .score{
+      font-weight:800; 
+      letter-spacing:1px;
+      font-size:80px;
+      line-height:1.1; 
+      min-width:160px;
+      flex-shrink:0;
+    }
+
+    .game-date, .game-number, .venue{ font-size:clamp(12px, 3.5vw, 18px); margin-top:8px; }
+    .game-number{ 
+      font-size:clamp(14.4px, 4.2vw, 30px); 
+      margin-top:12px;
+      margin-bottom:12px;
+    }
+    .game-date{ font-size:clamp(12px, 3.5vw, 30px); }
+    .venue{ font-size:clamp(12px, 3.5vw, 21.6px); margin-top:8px; }
+    .venue a{ color:#fff; text-decoration:none; }
+    .venue a:hover{ text-decoration:underline; }
+    .additions{ font-size:clamp(12px, 3.5vw, 21.6px); margin-top:8px; color:#fff; font-weight:600; }
+    
+    .pizza-icon{ 
+      width:clamp(30px, 6vw, 50px); 
+      height:clamp(30px, 6vw, 50px); 
+      display:inline-block;
+      vertical-align:middle;
+      margin-left:8px;
+      margin-right:8px;
+    }
+
+    .edit-btn, .delete-btn{
+      position:absolute; 
+      top:10px;
+      padding:8px 12px; 
+      border-radius:10px; 
+      border:1px solid rgba(255,255,255,.6);
+      background:rgba(255,255,255,.15); 
+      color:#fff; 
+      cursor:pointer; 
+      font-size:14px;
+      min-height:44px;
+    }
+    .edit-btn{ inset-inline-end:10px; }
+    .delete-btn{ inset-inline-end:90px; background:rgba(220,53,69,.9); border-color:rgba(220,53,69,1); }
+    .delete-btn:hover{ filter:brightness(.95); }
+
+    /* Mobile improvements */
+    @media (max-width:600px){
+      .league-switcher{ 
+        font-size: 15px; 
+        padding:8px 12px;
+        gap:6px;
+      }
+      .league-switcher svg{ width: 16px; height: 16px; }
+
+      /* Enlarge header titles by 25% on mobile */
+      .league-name{ font-size:clamp(22.5px, 5.6vw, 35px) !important; }
+      .season-title{ font-size:clamp(22.5px, 5vw, 32.5px) !important; }
+
+      /* Improved mobile typography */
+      .team, .score{ 
+        font-size:clamp(19px, 5.5vw, 26px) !important; 
+      }
+      .teams{ 
+        gap:5px;
+      }
+      .game-strip{ 
+        padding:clamp(31px, 7.8vw, 42px) 6px; 
+        min-height:auto;
+      }
+      .logo{ width:min(234px, 65vw); }
+      .score{ min-width:auto; }
+      
+      /* Better spacing for game info */
+      .game-number{ 
+        margin-top:14px; 
+        margin-bottom:14px;
+        font-size:clamp(22.4px, 6vw, 27.6px) !important; 
+      }
+      .game-date{ font-size:clamp(18.7px, 5vw, 23px) !important; }
+      .venue{ font-size:clamp(17.3px, 4.6vw, 21.6px) !important; margin-top:6px; }
+      
+      /* Ensure touch targets are adequate */
+      .edit-btn, .delete-btn{ 
+        min-width:44px; 
+        min-height:44px; 
+        display:inline-flex;
+        align-items:center;
+        justify-content:center;
+      }
+    }
+
+    /* Medium mobile phones - 400-430px */
+    @media (max-width:430px) and (min-width:400px){
+      .teams{ gap:5px; }
+      .team, .score{ font-size:clamp(19px, 5.8vw, 25px) !important; }
+    }
+
+    /* iPhone 14 Pro Max, 15 Pro Max, Galaxy S23 Ultra, Pixel 8 Pro */
+    @media (max-width:430px){
+      .teams{ gap:5px; }
+      .team, .score{ font-size:clamp(20px, 6vw, 27px) !important; }
+    }
+
+    /* iPhone 14 Pro, 15 Pro, Galaxy S23+, OnePlus 11 */
+    @media (max-width:393px){
+      .teams{ gap:5px; }
+      .team, .score{ font-size:clamp(19px, 5.8vw, 26px) !important; }
+    }
+
+    /* iPhone 11, 12, 13, 14, 15, Galaxy S23, Pixel 8 */
+    @media (max-width:390px){
+      .teams{ gap:5px; }
+      .team, .score{ font-size:clamp(19px, 5.6vw, 25px) !important; }
+    }
+
+    /* Extra small screens - older iPhones, compact Androids */
+    @media (max-width:375px){
+      .team, .score{ 
+        font-size:clamp(18px, 5.3vw, 24px) !important; 
+      }
+      .teams{ gap:4px; }
+      .game-strip{ padding:20px 4px; }
+    }
+
+    /* Very small screens */
+    @media (max-width:360px){
+      .team, .score{ 
+        font-size:clamp(17px, 5vw, 22px) !important; 
+      }
+      .teams{ gap:4px; }
+    }
+
+    /* Landscape mobile optimization */
+    @media (max-width:900px) and (orientation:landscape){
+      .header{ padding:16px; }
+      .logo{ width:min(180px, 50vw); margin-bottom:12px; }
+      .league-name, .season-title{ font-size:clamp(14px, 3vw, 20px); }
+      .game-strip{ padding:20px 12px; }
+    }
+
+    /* Modal styles */
+    .modal{
+      display:none;
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.6);
+      z-index:50;
+      align-items:center;
+      justify-content:center;
+      padding:16px;
+    }
+    .modal-content{
+      background:#fff;
+      color:#000;
+      width:min(680px, 100%);
+      max-height:90vh;
+      overflow:auto;
+      border-radius:16px;
+      padding:24px;
+      box-shadow:0 4px 12px rgba(0,0,0,.25);
+    }
+    .form-group{ margin-bottom:16px; }
+    .form-group label{ display:block; margin-bottom:6px; font-weight:600; }
+    .form-group input, .form-group select{ 
+      width:100%; 
+      padding:10px; 
+      border:1px solid #ccc; 
+      border-radius:8px;
+      font-size:16px;
+    }
+    .form-actions{ display:flex; gap:10px; margin-top:16px; flex-wrap:wrap; }
+    .btn{ 
+      padding:10px 16px; 
+      border:none; 
+      border-radius:10px; 
+      font-weight:700; 
+      cursor:pointer;
+      min-height:44px;
+      font-size:16px;
+    }
+    .btn-primary{ background:var(--phk-blue); color:#fff; }
+    .btn-secondary{ background:#6c757d; color:#fff; }
+  </style>
 </head>
 <body>
-    <button class="league-switcher" onclick="switchLeague()" title="החלפת ליגה" aria-label="החלפת ליגה">ליגות <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 15 16" fill="none">
-<path d="M10.9692 4.32324L5.43077 4.32324C2.98372 4.32324 1 6.30697 1 8.75401V8.9694" stroke="#1A6DFF" />
-<path d="M8.56271 0.999785L11.6957 4.13281L8.56271 7.26584" stroke="#1A6DFF" />
-<path d="M4.15577 12.0771L9.69423 12.0771C12.1413 12.0771 14.125 10.0934 14.125 7.64638V7.43099" stroke="#1A6DFF" />
-<path d="M6.56229 15.4006L3.42926 12.2676L6.56229 9.13455" stroke="#1A6DFF" />
-</svg></button>
-    <button class="admin-toggle" onclick="toggleAdminMode()">Admin Mode: OFF</button>
-    <button class="export-btn" id="exportBtn" style="display: none;" onclick="exportData()">📥 Export JSON</button>
-    <button class="add-game-btn" id="addGameBtn" style="display: none;" onclick="addNewGame()">+ Add Game</button>
+  <button class="league-switcher" onclick="switchLeague()" title="ליגות" id="leagueSwitcher">
+    <svg viewBox="0 0 15 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+      <path d="M10.9692 4.32324H5.43077C2.98372 4.32324 1 6.30697 1 8.75401V8.9694" stroke="#1A6DFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M8.56271 0.999785L11.6957 4.13281L8.56271 7.26584" stroke="#1A6DFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M4.15577 12.0771H9.69423C12.1413 12.0771 14.125 10.0934 14.125 7.64638V7.43099" stroke="#1A6DFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M6.56229 15.4006L3.42926 12.2676L6.56229 9.13455" stroke="#1A6DFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    ליגות
+  </button>
+  <button class="admin-toggle" onclick="toggleAdminMode()">Admin Mode: OFF</button>
+  <button class="export-btn" id="exportBtn" onclick="exportData()">📥 Export JSON</button>
+  <button class="add-game-btn" id="addGameBtn" onclick="addNewGame()">+ Add Game</button>
 
-    <div class="header">
-        <div class="logo"><img src="logo.png" alt="PHK Logo"></div>
-        <div class="league-name" id="leagueName">ילדים ב שומרון</div>
-        <div class="season-title">GAME SEASON<br>2025/2026</div>
-    </div>
+  <header class="header">
+    <div class="logo"><img src="logo.png" alt="PHK Logo" id="logoImg" /></div>
+    <div class="league-name" id="leagueName">ילדים ב׳ שומרון (מאמן שקד)</div>
+    <div class="season-title" id="seasonTitle"><a href="https://ibasketball.co.il/league/2025-357/" target="_blank" rel="noopener">GAME SEASON<br/>2025/2026</a></div>
+  </header>
 
-    <div class="games-container" id="gamesContainer"></div>
+  <main class="games-container" id="gamesContainer" role="list"></main>
 
-    <div class="modal" id="editModal">
-        <div class="modal-content">
-            <h2>Edit Game</h2>
-            <form id="editForm">
-                <input type="hidden" id="editIndex">
-                
-                <div class="form-group">
-                    <label>Game Number:</label>
-                    <input type="number" id="editGameNumber" min="1" required>
-                </div>
-
-                <div class="form-group">
-                    <label>Game Type:</label>
-                    <select id="editType">
-                        <option value="home">Home</option>
-                        <option value="away">Away</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label>Home Team:</label>
-                    <input type="text" id="editTeam1" required>
-                </div>
-
-                <div class="form-group">
-                    <label>Home Team Suffix (optional, e.g., S, W):</label>
-                    <input type="text" id="editTeam1Suffix" maxlength="2">
-                </div>
-
-                <div class="form-group">
-                    <label>Away Team:</label>
-                    <input type="text" id="editTeam2" required>
-                </div>
-
-                <div class="form-group">
-                    <label>Away Team Suffix (optional, e.g., S, W):</label>
-                    <input type="text" id="editTeam2Suffix" maxlength="2">
-                </div>
-
-                <div class="form-group">
-                    <label>Score (format: 0:0):</label>
-                    <input type="text" id="editScore" pattern="\d+:\d+" required>
-                </div>
-
-                <div class="form-group">
-                    <label>Date (e.g., Nov 13, 2025):</label>
-                    <input type="text" id="editDate" required>
-                </div>
-
-                <div class="form-group">
-                    <label>Time (e.g., 17:30):</label>
-                    <input type="text" id="editTime" required>
-                </div>
-
-                <div class="form-group">
-                    <label>Venue Name:</label>
-                    <input type="text" id="editVenue" required>
-                </div>
-
-                <div class="form-group">
-                    <label>Venue Google Maps Link:</label>
-                    <input type="url" id="editVenueLink" required>
-                </div>
-
-                <div class="form-actions">
-                    <button type="submit" class="btn btn-primary">Save</button>
-                    <button type="button" class="btn btn-secondary" onclick="closeModal()">Cancel</button>
-                </div>
-            </form>
+  <!-- Modal -->
+  <div class="modal" id="editModal" role="dialog" aria-modal="true" aria-labelledby="editTitle">
+    <div class="modal-content">
+      <h2 id="editTitle">Edit Game</h2>
+      <form id="editForm">
+        <input type="hidden" id="editIndex" />
+        <div class="form-group"><label>Game Number:</label><input type="number" id="editGameNumber" min="1" required /></div>
+        <div class="form-group"><label>Game Type:</label>
+          <select id="editType"><option value="home">Home</option><option value="away">Away</option></select>
         </div>
+        <div class="form-group"><label>Home Team:</label><input type="text" id="editTeam1" required /></div>
+        <div class="form-group"><label>Home Team Suffix (optional, e.g., S, W):</label><input type="text" id="editTeam1Suffix" maxlength="2" /></div>
+        <div class="form-group"><label>Away Team:</label><input type="text" id="editTeam2" required /></div>
+        <div class="form-group"><label>Away Team Suffix (optional, e.g., S, W):</label><input type="text" id="editTeam2Suffix" maxlength="2" /></div>
+        <div class="form-group">
+          <label>Score:</label>
+          <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+            <span style="font-weight:600;">Home:</span>
+            <input type="number" id="editScoreHome" min="0" required style="width:80px;" />
+            <span style="font-weight:700; font-size:20px;">:</span>
+            <input type="number" id="editScoreAway" min="0" required style="width:80px;" />
+            <span style="font-weight:600;">Away</span>
+          </div>
+        </div>
+        <div class="form-group"><label>Date (e.g., Nov 13, 2025):</label><input type="text" id="editDate" required /></div>
+        <div class="form-group"><label>Time (e.g., 17:30):</label><input type="text" id="editTime" required /></div>
+        <div class="form-group"><label>Venue Name:</label><input type="text" id="editVenue" required /></div>
+        <div class="form-group"><label>Venue Google Maps Link:</label><input type="url" id="editVenueLink" required /></div>
+        <div class="form-group"><label>Additions (optional notes/messages):</label><input type="text" id="editAdditions" placeholder="לדוגמה: רעננה משפחת כהן או הערות נוספות" /></div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">Save</button>
+          <button type="button" class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+        </div>
+      </form>
     </div>
+  </div>
 
-    <script>
-        let adminMode = false;
-        let currentLeague = 'ב'; // 'ב' or 'א'
-        
-        const leagueData = {
-            'ב': {
-                name: 'ילדים ב׳ שומרון (מאמן שקד)',
-                games: [
-            {
-                type: 'home',
-                team1: 'PHK',
-                team1Suffix: 'S',
-                team2: 'PHK',
-                team2Suffix: '',
-                score: '0:0',
-                date: 'Nov 13, 2025',
-                time: '17:30',
-                venue: 'ביה"ס מעיינות, רח\' הצליל 8, פרדס חנה כרכור',
-                venueLink: 'https://maps.app.goo.gl/ehjmqR18a53PCmG7A'
-            },
-            {
-                type: 'away',
-                team1: 'חדרה',
-                team1Suffix: 'W',
-                team2: 'PHK',
-                team2Suffix: '',
-                score: '0:0',
-                date: 'Nov 27, 2025',
-                time: '19:30',
-                venue: 'עמל מדעים ואומנויות, רח\' באר אורה, חדרה',
-                venueLink: 'https://maps.app.goo.gl/4RPqDeETMmXyAPwX7'
-            },
-            {
-                type: 'home',
-                team1: 'PHK',
-                team1Suffix: '',
-                team2: 'בקה-ג\'ת',
-                team2Suffix: '',
-                score: '0:0',
-                date: 'Dec 4, 2025',
-                time: '17:30',
-                venue: 'ביה"ס מעיינות, רח\' הצליל 8, פרדס חנה כרכור',
-                venueLink: 'https://maps.app.goo.gl/ehjmqR18a53PCmG7A'
-            },
-            {
-                type: 'away',
-                team1: 'ה.מנשה',
-                team1Suffix: '',
-                team2: 'PHK',
-                team2Suffix: '',
-                score: '0:0',
-                date: 'Dec 11, 2025',
-                time: '19:00',
-                venue: 'היכל הספורט מנשה',
-                venueLink: 'https://maps.app.goo.gl/d4XgtDHgP5Jv3UHd9'
-            },
-            {
-                type: 'home',
-                team1: 'PHK',
-                team1Suffix: '',
-                team2: 'חריש-מי עמי',
-                team2Suffix: '',
-                score: '0:0',
-                date: 'Dec 25, 2025',
-                time: '17:30',
-                venue: 'ביה"ס מעיינות, רח\' הצליל 8, פרדס חנה כרכור',
-                venueLink: 'https://maps.app.goo.gl/ehjmqR18a53PCmG7A'
-            },
-            {
-                type: 'home',
-                team1: 'PHK',
-                team1Suffix: '',
-                team2: 'חדרה מרכז',
-                team2Suffix: '',
-                score: '0:0',
-                date: 'Jan 1, 2026',
-                time: '19:30',
-                venue: 'ביה"ס מעיינות, רח\' הצליל 8, פרדס חנה',
-                venueLink: 'https://maps.app.goo.gl/ehjmqR18a53PCmG7A'
-            },
-            {
-                type: 'home',
-                team1: 'PHK',
-                team1Suffix: '',
-                team2: 'נתניה',
-                team2Suffix: '',
-                score: '0:0',
-                date: 'Nov 26, 2025',
-                time: '18:00',
-                venue: 'ביה"ס מעיינות, רח\' הצליל 8, פרדס חנה כרכור',
-                venueLink: 'https://maps.app.goo.gl/ehjmqR18a53PCmG7A'
-            },
-            {
-                type: 'away',
-                team1: 'רעננה',
-                team1Suffix: '',
-                team2: 'PHK',
-                team2Suffix: '',
-                score: '0:0',
-                date: 'Dec 3, 2025',
-                time: '20:30',
-                venue: 'קומפלקס כדורסל רעננה, רעננה',
-                venueLink: 'https://www.google.com/maps/search/?api=1&query=Raanana+Basketball+Complex+Raanana'
-            },
-            {
-                type: 'home',
-                team1: 'PHK',
-                team1Suffix: '',
-                team2: 'תל אביב',
-                team2Suffix: '',
-                score: '0:0',
-                date: 'Dec 10, 2025',
-                time: '19:00',
-                venue: 'ביה"ס מעיינות, רח\' הצליל 8, פרדס חנה כרכור',
-                venueLink: 'https://maps.app.goo.gl/ehjmqR18a53PCmG7A'
-            },
-            {
-                type: 'away',
-                team1: 'חיפה',
-                team1Suffix: '',
-                team2: 'PHK',
-                team2Suffix: '',
-                score: '0:0',
-                date: 'Dec 17, 2025',
-                time: '18:30',
-                venue: 'מרכז ספורט חיפה, חיפה',
-                venueLink: 'https://www.google.com/maps/search/?api=1&query=Haifa+Sports+Center+Haifa'
-            },
-            {
-                type: 'home',
-                team1: 'PHK',
-                team1Suffix: '',
-                team2: 'ירושלים',
-                team2Suffix: '',
-                score: '0:0',
-                date: 'Dec 24, 2025',
-                time: '17:00',
-                venue: 'ביה"ס מעיינות, רח\' הצליל 8, פרדס חנה כרכור',
-                venueLink: 'https://maps.app.goo.gl/ehjmqR18a53PCmG7A'
-            },
-            {
-                type: 'away',
-                team1: 'אשדוד',
-                team1Suffix: '',
-                team2: 'PHK',
-                team2Suffix: '',
-                score: '0:0',
-                date: 'Jan 7, 2026',
-                time: '20:00',
-                venue: 'היכל אשדוד, אשדוד',
-                venueLink: 'https://www.google.com/maps/search/?api=1&query=Ashdod+Arena+Ashdod'
-            },
-            {
-                type: 'home',
-                team1: 'PHK',
-                team1Suffix: '',
-                team2: 'באר שבע',
-                team2Suffix: '',
-                score: '0:0',
-                date: 'Jan 14, 2026',
-                time: '19:30',
-                venue: 'ביה"ס מעיינות, רח\' הצליל 8, פרדס חנה כרכור',
-                venueLink: 'https://maps.app.goo.gl/ehjmqR18a53PCmG7A'
-            },
-            {
-                type: 'away',
-                team1: 'נתניה',
-                team1Suffix: '',
-                team2: 'PHK',
-                team2Suffix: '',
-                score: '0:0',
-                date: 'Jan 21, 2026',
-                time: '18:00',
-                venue: 'אולם ספורט נתניה, נתניה',
-                venueLink: 'https://www.google.com/maps/search/?api=1&query=Netanya+Sports+Hall+Netanya'
-            },
-            {
-                type: 'home',
-                team1: 'PHK',
-                team1Suffix: '',
-                team2: 'ראשון לציון',
-                team2Suffix: '',
-                score: '0:0',
-                date: 'Jan 28, 2026',
-                time: '19:00',
-                venue: 'ביה"ס מעיינות, רח\' הצליל 8, פרדס חנה כרכור',
-                venueLink: 'https://maps.app.goo.gl/ehjmqR18a53PCmG7A'
-            },
-            {
-                type: 'away',
-                team1: 'רעננה',
-                team1Suffix: '',
-                team2: 'PHK',
-                team2Suffix: '',
-                score: '0:0',
-                date: 'Feb 4, 2026',
-                time: '20:30',
-                venue: 'קומפלקס כדורסל רעננה, רעננה',
-                venueLink: 'https://www.google.com/maps/search/?api=1&query=Raanana+Basketball+Complex+Raanana'
-            },
-            {
-                type: 'home',
-                team1: 'PHK',
-                team1Suffix: '',
-                team2: 'תל אביב',
-                team2Suffix: '',
-                score: '0:0',
-                date: 'Feb 11, 2026',
-                time: '18:30',
-                venue: 'ביה"ס מעיינות, רח\' הצליל 8, פרדס חנה כרכור',
-                venueLink: 'https://maps.app.goo.gl/ehjmqR18a53PCmG7A'
-            }
-        ]
-            },
-            'א': {
-                name: 'קט סל א׳ (מאמן: יאיר/יותם)',
-                games: [
-                    {
-                        type: 'home',
-                        team1: 'PHK',
-                        team1Suffix: 'S',
-                        team2: 'PHK',
-                        team2Suffix: '',
-                        score: '0:0',
-                        date: 'Nov 13, 2025',
-                        time: '17:30',
-                        venue: 'ביה"ס מעיינות, רח\' הצליל 8, פרדס חנה כרכור',
-                        venueLink: 'https://maps.app.goo.gl/ehjmqR18a53PCmG7A'
-                    },
-                    {
-                        type: 'away',
-                        team1: 'חדרה',
-                        team1Suffix: 'W',
-                        team2: 'PHK',
-                        team2Suffix: '',
-                        score: '0:0',
-                        date: 'Nov 27, 2025',
-                        time: '19:30',
-                        venue: 'עמל מדעים ואומנויות, רח\' באר אורה, חדרה',
-                        venueLink: 'https://maps.app.goo.gl/4RPqDeETMmXyAPwX7'
-                    },
-                    {
-                        type: 'home',
-                        team1: 'PHK',
-                        team1Suffix: '',
-                        team2: 'חיפה',
-                        team2Suffix: '',
-                        score: '0:0',
-                        date: 'Oct 29, 2025',
-                        time: '18:15',
-                        venue: 'ביה"ס מעיינות, רח\' הצליל 8, פרדס חנה כרכור',
-                        venueLink: 'https://maps.app.goo.gl/ehjmqR18a53PCmG7A'
-                    },
-                    {
-                        type: 'away',
-                        team1: 'באר שבע',
-                        team1Suffix: '',
-                        team2: 'PHK',
-                        team2Suffix: '',
-                        score: '0:0',
-                        date: 'Nov 5, 2025',
-                        time: '20:00',
-                        venue: 'מרכז ספורט באר שבע, באר שבע',
-                        venueLink: 'https://www.google.com/maps/search/?api=1&query=Beersheba+Sports+Center+Beersheba'
-                    },
-                    {
-                        type: 'home',
-                        team1: 'PHK',
-                        team1Suffix: '',
-                        team2: 'אשדוד',
-                        team2Suffix: '',
-                        score: '0:0',
-                        date: 'Nov 12, 2025',
-                        time: '17:30',
-                        venue: 'ביה"ס מעיינות, רח\' הצליל 8, פרדס חנה כרכור',
-                        venueLink: 'https://maps.app.goo.gl/ehjmqR18a53PCmG7A'
-                    },
-                    {
-                        type: 'away',
-                        team1: 'ראשון לציון',
-                        team1Suffix: '',
-                        team2: 'PHK',
-                        team2Suffix: '',
-                        score: '0:0',
-                        date: 'Nov 19, 2025',
-                        time: '19:30',
-                        venue: 'היכל ראשון לציון, ראשון לציון',
-                        venueLink: 'https://www.google.com/maps/search/?api=1&query=Rishon+LeZion+Arena+Rishon+LeZion'
-                    },
-                    {
-                        type: 'home',
-                        team1: 'PHK',
-                        team1Suffix: '',
-                        team2: 'נתניה',
-                        team2Suffix: '',
-                        score: '0:0',
-                        date: 'Nov 26, 2025',
-                        time: '18:00',
-                        venue: 'ביה"ס מעיינות, רח\' הצליל 8, פרדס חנה כרכור',
-                        venueLink: 'https://maps.app.goo.gl/ehjmqR18a53PCmG7A'
-                    },
-                    {
-                        type: 'away',
-                        team1: 'רעננה',
-                        team1Suffix: '',
-                        team2: 'PHK',
-                        team2Suffix: '',
-                        score: '0:0',
-                        date: 'Dec 3, 2025',
-                        time: '20:30',
-                        venue: 'קומפלקס כדורסל רעננה, רעננה',
-                        venueLink: 'https://www.google.com/maps/search/?api=1&query=Raanana+Basketball+Complex+Raanana'
-                    },
-                    {
-                        type: 'home',
-                        team1: 'PHK',
-                        team1Suffix: '',
-                        team2: 'תל אביב',
-                        team2Suffix: '',
-                        score: '0:0',
-                        date: 'Dec 10, 2025',
-                        time: '19:00',
-                        venue: 'ביה"ס מעיינות, רח\' הצליל 8, פרדס חנה כרכור',
-                        venueLink: 'https://maps.app.goo.gl/ehjmqR18a53PCmG7A'
-                    },
-                    {
-                        type: 'away',
-                        team1: 'חיפה',
-                        team1Suffix: '',
-                        team2: 'PHK',
-                        team2Suffix: '',
-                        score: '0:0',
-                        date: 'Dec 17, 2025',
-                        time: '18:30',
-                        venue: 'מרכז ספורט חיפה, חיפה',
-                        venueLink: 'https://www.google.com/maps/search/?api=1&query=Haifa+Sports+Center+Haifa'
-                    },
-                    {
-                        type: 'home',
-                        team1: 'PHK',
-                        team1Suffix: '',
-                        team2: 'ירושלים',
-                        team2Suffix: '',
-                        score: '0:0',
-                        date: 'Dec 24, 2025',
-                        time: '17:00',
-                        venue: 'ביה"ס מעיינות, רח\' הצליל 8, פרדס חנה כרכור',
-                        venueLink: 'https://maps.app.goo.gl/ehjmqR18a53PCmG7A'
-                    },
-                    {
-                        type: 'away',
-                        team1: 'אשדוד',
-                        team1Suffix: '',
-                        team2: 'PHK',
-                        team2Suffix: '',
-                        score: '0:0',
-                        date: 'Jan 7, 2026',
-                        time: '20:00',
-                        venue: 'היכל אשדוד, אשדוד',
-                        venueLink: 'https://www.google.com/maps/search/?api=1&query=Ashdod+Arena+Ashdod'
-                    },
-                    {
-                        type: 'home',
-                        team1: 'PHK',
-                        team1Suffix: '',
-                        team2: 'באר שבע',
-                        team2Suffix: '',
-                        score: '0:0',
-                        date: 'Jan 14, 2026',
-                        time: '19:30',
-                        venue: 'ביה"ס מעיינות, רח\' הצליל 8, פרדס חנה כרכור',
-                        venueLink: 'https://maps.app.goo.gl/ehjmqR18a53PCmG7A'
-                    },
-                    {
-                        type: 'away',
-                        team1: 'נתניה',
-                        team1Suffix: '',
-                        team2: 'PHK',
-                        team2Suffix: '',
-                        score: '0:0',
-                        date: 'Jan 21, 2026',
-                        time: '18:00',
-                        venue: 'אולם ספורט נתניה, נתניה',
-                        venueLink: 'https://www.google.com/maps/search/?api=1&query=Netanya+Sports+Hall+Netanya'
-                    },
-                    {
-                        type: 'home',
-                        team1: 'PHK',
-                        team1Suffix: '',
-                        team2: 'ראשון לציון',
-                        team2Suffix: '',
-                        score: '0:0',
-                        date: 'Jan 28, 2026',
-                        time: '19:00',
-                        venue: 'ביה"ס מעיינות, רח\' הצליל 8, פרדס חנה כרכור',
-                        venueLink: 'https://maps.app.goo.gl/ehjmqR18a53PCmG7A'
-                    },
-                    {
-                        type: 'away',
-                        team1: 'רעננה',
-                        team1Suffix: '',
-                        team2: 'PHK',
-                        team2Suffix: '',
-                        score: '0:0',
-                        date: 'Feb 4, 2026',
-                        time: '20:30',
-                        venue: 'קומפלקס כדורסל רעננה, רעננה',
-                        venueLink: 'https://www.google.com/maps/search/?api=1&query=Raanana+Basketball+Complex+Raanana'
-                    },
-                    {
-                        type: 'home',
-                        team1: 'PHK',
-                        team1Suffix: '',
-                        team2: 'תל אביב',
-                        team2Suffix: '',
-                        score: '0:0',
-                        date: 'Feb 11, 2026',
-                        time: '18:30',
-                        venue: 'ביה"ס מעיינות, רח\' הצליל 8, פרדס חנה כרכור',
-                        venueLink: 'https://maps.app.goo.gl/ehjmqR18a53PCmG7A'
-                    }
-                ]
-            }
+  <script>
+    let adminMode = false;
+    let currentLeague = 'ב'; // 'ב' or 'א'
+
+    const leagueData = {
+      'ב': { 
+        name: 'ילדים ב׳ שומרון (מאמן שקד)', 
+        games: [],
+        url: 'https://ibasketball.co.il/league/2025-357/'
+      },
+      'א': { 
+        name: 'קט סל א׳ (מאמן: יאיר)', 
+        games: [],
+        url: 'https://ibasketball.co.il/league/2025-560/'
+      }
+    };
+    let games = [];
+
+    // Get league from URL parameter
+    function getLeagueFromURL(){
+      const urlParams = new URLSearchParams(window.location.search);
+      const leagueParam = urlParams.get('league');
+      
+      // If URL has ?league=a or ?league=א, show league א
+      if(leagueParam === 'a' || leagueParam === 'א'){
+        return 'א';
+      }
+      // If URL has ?league=b or ?league=ב, show league ב
+      else if(leagueParam === 'b' || leagueParam === 'ב'){
+        return 'ב';
+      }
+      // Default to ב
+      return 'ב';
+    }
+
+    // Initialize league from URL on page load
+    currentLeague = getLeagueFromURL();
+
+    // Update the league switcher to navigate to other league URL
+    function updateLeagueSwitcher(){
+      const switcherBtn = document.getElementById('leagueSwitcher');
+      if(switcherBtn){
+        const otherLeague = currentLeague === 'ב' ? 'a' : 'b';
+        const otherLeagueName = currentLeague === 'ב' ? 'ליגה א' : 'ליגה ב';
+        switcherBtn.onclick = function(){
+          window.location.href = `?league=${otherLeague}`;
         };
+        switcherBtn.title = `עבור ל${otherLeagueName}`;
+      }
+      
+      // Update logo based on league
+      const logoImg = document.getElementById('logoImg');
+      if(logoImg){
+        if(currentLeague === 'ב'){
+          logoImg.src = 'logo2.png';
+        } else {
+          logoImg.src = 'logo.png';
+        }
+      }
+      
+      // Update season title URL based on league
+      const seasonTitle = document.getElementById('seasonTitle');
+      if(seasonTitle){
+        const link = seasonTitle.querySelector('a');
+        if(link){
+          link.href = leagueData[currentLeague].url;
+        }
+      }
+    }
 
-        let games = leagueData[currentLeague].games;
+    // Load from JSON with graceful fallback
+    async function loadGamesFromJSON(){
+      try{
+        // prefer previously saved local data if exists
+        const saved = JSON.parse(localStorage.getItem('phkLeagueData') || 'null');
+        if(saved){ leagueData['ב'].games = saved['ב'] || []; leagueData['א'].games = saved['א'] || []; }
+      }catch(e){}
 
-        // Load data from JSON file
-        async function loadGamesFromJSON() {
-            try {
-                const response = await fetch('games-data.json');
-                if (response.ok) {
-                    const jsonData = await response.json();
-                    leagueData['ב'].games = jsonData['ב'] || leagueData['ב'].games;
-                    leagueData['א'].games = jsonData['א'] || leagueData['א'].games;
-                    games = leagueData[currentLeague].games;
-                    renderGames();
-                }
-            } catch (error) {
-                console.log('Loading from default data');
-            }
+      try{
+        const res = await fetch('games-data.json',{cache:'no-store'});
+        if(res.ok){
+          const json = await res.json();
+          leagueData['ב'].games = json['ב'] || leagueData['ב'].games;
+          leagueData['א'].games = json['א'] || leagueData['א'].games;
+        }
+      }catch(e){ /* ignore network errors */ }
+
+      if(!leagueData['ב'].games.length && !leagueData['א'].games.length){
+        leagueData['ב'].games = [{
+          type:'home', team1:'PHK', team1Suffix:'S', team2:'PHK', team2Suffix:'', score:'0:0',
+          date:'Nov 13, 2025', time:'17:30',
+          venue:'ביה"ס מעיינות, רח\' הצליל 8, פרדס חנה כרכור',
+          venueLink:'https://maps.app.goo.gl/ehjmqR18a53PCmG7A'
+        }];
+        leagueData['א'].games = leagueData['ב'].games.slice();
+      }
+
+      games = leagueData[currentLeague].games;
+      document.getElementById('leagueName').textContent = leagueData[currentLeague].name;
+      updateLeagueSwitcher();
+      renderGames();
+    }
+
+    function saveGames(){
+      const dataToSave = { 'ב': leagueData['ב'].games, 'א': leagueData['א'].games };
+      localStorage.setItem('phkLeagueData', JSON.stringify(dataToSave));
+      localStorage.setItem('phkCurrentLeague', currentLeague);
+    }
+
+    function exportData(){
+      const dataToExport = { 'ב': leagueData['ב'].games, 'א': leagueData['א'].games };
+      const jsonString = JSON.stringify(dataToExport, null, 2);
+      const blob = new Blob([jsonString], { type:'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = 'games-data.json';
+      document.body.appendChild(a); a.click(); a.remove();
+      URL.revokeObjectURL(url);
+      alert('JSON file downloaded! Upload this file to Netlify/GitHub Pages to update your site.');
+    }
+
+    function switchLeague(){
+      // This function is now handled by URL navigation
+      const otherLeague = currentLeague === 'ב' ? 'a' : 'b';
+      window.location.href = `?league=${otherLeague}`;
+    }
+
+    function renderGames(){
+      const container = document.getElementById('gamesContainer');
+      container.innerHTML = '';
+      
+      // Determine which team to follow based on league
+      const myTeam = currentLeague === 'ב' ? 'PHK' : 'PHKשרת';
+      
+      games.forEach((game, index) => {
+        const el = document.createElement('div');
+        const isPlayed = game.score && game.score !== '0:0';
+        const playedClass = isPlayed ? 'played' : '';
+        el.className = `game-strip ${game.type} ${playedClass}`;
+
+        const isTeam1Heb = !String(game.team1).startsWith('PHK');
+        const isTeam2Heb = !String(game.team2).startsWith('PHK');
+        const t1Class = isTeam1Heb ? 'team hebrew' : 'team';
+        const t2Class = isTeam2Heb ? 'team hebrew' : 'team';
+
+        const gameNumber = String(index + 1).padStart(2, '0');
+        
+        // Check if my team is winning
+        let showPizza = false;
+        let myTeamPosition = ''; // 'left' or 'right'
+        
+        if(isPlayed && game.score && game.score !== '0:0'){
+          const scores = game.score.split(':');
+          const score1 = parseInt(scores[0]);
+          const score2 = parseInt(scores[1]);
+          
+          // Check where my team is and if they won
+          const isMyTeam1 = game.team1 === myTeam;
+          const isMyTeam2 = game.team2 === myTeam;
+          
+          if(isMyTeam1 && score1 > score2){
+            showPizza = true;
+            myTeamPosition = game.type === 'home' ? 'right' : 'left';
+          } else if(isMyTeam2 && score2 > score1){
+            showPizza = true;
+            myTeamPosition = game.type === 'away' ? 'right' : 'left';
+          }
         }
 
-        // Load on page load
-        loadGamesFromJSON();
-
-        function saveGames() {
-            const dataToSave = {
-                'ב': leagueData['ב'].games,
-                'א': leagueData['א'].games
-            };
-            localStorage.setItem('phkLeagueData', JSON.stringify(dataToSave));
-            localStorage.setItem('phkCurrentLeague', currentLeague);
+        // Display logic:
+        // HOME games (blue): team1 on RIGHT, team2 on LEFT
+        // AWAY games (black): team1 on LEFT, team2 on RIGHT
+        
+        let leftTeam, rightTeam, leftTeamClass, rightTeamClass, leftSuffix, rightSuffix;
+        let leftPizza = '', rightPizza = '';
+        
+        if(game.type === 'home'){
+          // HOME game: team1 is home (right), team2 is away (left)
+          leftTeam = game.team2;
+          rightTeam = game.team1;
+          leftTeamClass = t2Class;
+          rightTeamClass = t1Class;
+          leftSuffix = game.team2Suffix || '';
+          rightSuffix = game.team1Suffix || '';
+          
+          if(showPizza && myTeamPosition === 'right'){
+            rightPizza = `<img src="pizza.png" alt="Pizza" class="pizza-icon" />`;
+          } else if(showPizza && myTeamPosition === 'left'){
+            leftPizza = `<img src="pizza.png" alt="Pizza" class="pizza-icon" />`;
+          }
+        } else {
+          // AWAY game: team1 is away (left), team2 is home (right)
+          leftTeam = game.team1;
+          rightTeam = game.team2;
+          leftTeamClass = t1Class;
+          rightTeamClass = t2Class;
+          leftSuffix = game.team1Suffix || '';
+          rightSuffix = game.team2Suffix || '';
+          
+          if(showPizza && myTeamPosition === 'left'){
+            leftPizza = `<img src="pizza.png" alt="Pizza" class="pizza-icon" />`;
+          } else if(showPizza && myTeamPosition === 'right'){
+            rightPizza = `<img src="pizza.png" alt="Pizza" class="pizza-icon" />`;
+          }
         }
 
-        function exportData() {
-            const dataToExport = {
-                'ב': leagueData['ב'].games,
-                'א': leagueData['א'].games
-            };
-            const jsonString = JSON.stringify(dataToExport, null, 2);
-            const blob = new Blob([jsonString], { type: 'application/json' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'games-data.json';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-            alert('JSON file downloaded! Upload this file to Netlify to update your site.');
+        el.innerHTML = `
+          ${adminMode ? `<button class="delete-btn" onclick="deleteGame(${index})">Delete</button>` : ''}
+          ${adminMode ? `<button class="edit-btn" onclick="editGame(${index})">Edit</button>` : ''}
+          <div class="teams">
+            <span class="${leftTeamClass}">
+              ${leftPizza}
+              ${leftTeam}${leftSuffix ? `<span class="team-suffix">${leftSuffix}</span>` : ''}
+            </span>
+            <span class="score" aria-label="Score">${game.score || '0:0'}</span>
+            <span class="${rightTeamClass}">
+              ${rightTeam}${rightSuffix ? `<span class="team-suffix">${rightSuffix}</span>` : ''}
+              ${rightPizza}
+            </span>
+          </div>
+          <div class="game-number">GAME ${gameNumber}</div>
+          <div class="game-date">${game.date} • ${game.time}</div>
+          <div class="venue"><a href="${game.venueLink}" target="_blank" rel="noopener">${game.venue}</a></div>
+          ${game.additions ? `<div class="additions">${game.additions}</div>` : ''}
+        `;
+        container.appendChild(el);
+      });
+    }
+
+    function toggleAdminMode(){
+      if(!adminMode){
+        // Prompt for password when turning ON admin mode
+        const password = prompt('Enter admin password:');
+        if(password !== 'PHK2025'){
+          alert('Incorrect password');
+          return;
         }
+      }
+      
+      adminMode = !adminMode;
+      const btn = document.querySelector('.admin-toggle');
+      const addBtn = document.getElementById('addGameBtn');
+      const exportBtn = document.getElementById('exportBtn');
+      btn.textContent = `Admin Mode: ${adminMode ? 'ON' : 'OFF'}`;
+      btn.style.background = adminMode ? '#dc3545' : '#0066cc';
+      if(addBtn) addBtn.style.display = adminMode ? 'inline-flex' : 'none';
+      if(exportBtn) exportBtn.style.display = adminMode ? 'inline-flex' : 'none';
+      renderGames();
+    }
 
-        function switchLeague() {
-            // Save current league games before switching
-            leagueData[currentLeague].games = games;
-            
-            // Switch league
-            currentLeague = currentLeague === 'ב' ? 'א' : 'ב';
-            games = leagueData[currentLeague].games;
-            
-            // Update league name display
-            document.getElementById('leagueName').textContent = leagueData[currentLeague].name;
-            
-            // Save and render
-            saveGames();
-            renderGames();
-        }
+    function editGame(index){
+      const game = games[index];
+      const scores = (game.score || '0:0').split(':');
+      document.getElementById('editIndex').value = index;
+      document.getElementById('editGameNumber').value = index + 1;
+      document.getElementById('editType').value = game.type;
+      document.getElementById('editTeam1').value = game.team1;
+      document.getElementById('editTeam1Suffix').value = game.team1Suffix || '';
+      document.getElementById('editTeam2').value = game.team2;
+      document.getElementById('editTeam2Suffix').value = game.team2Suffix || '';
+      document.getElementById('editScoreHome').value = scores[0] || '0';
+      document.getElementById('editScoreAway').value = scores[1] || '0';
+      document.getElementById('editDate').value = game.date || '';
+      document.getElementById('editTime').value = game.time || '';
+      document.getElementById('editVenue').value = game.venue || '';
+      document.getElementById('editVenueLink').value = game.venueLink || '';
+      document.getElementById('editAdditions').value = game.additions || '';
+      document.getElementById('editModal').style.display = 'flex';
+    }
 
-        function renderGames() {
-            const container = document.getElementById('gamesContainer');
-            container.innerHTML = '';
+    function addNewGame(){
+      document.getElementById('editIndex').value = -1;
+      document.getElementById('editGameNumber').value = games.length + 1;
+      document.getElementById('editType').value = 'home';
+      document.getElementById('editTeam1').value = 'PHK';
+      document.getElementById('editTeam1Suffix').value = '';
+      document.getElementById('editTeam2').value = '';
+      document.getElementById('editTeam2Suffix').value = '';
+      document.getElementById('editScoreHome').value = '0';
+      document.getElementById('editScoreAway').value = '0';
+      document.getElementById('editDate').value = '';
+      document.getElementById('editTime').value = '';
+      document.getElementById('editVenue').value = 'ביה"ס מעיינות, רח\' הצליל 8, פרדס חנה כרכור';
+      document.getElementById('editVenueLink').value = 'https://maps.app.goo.gl/ehjmqR18a53PCmG7A';
+      document.getElementById('editAdditions').value = '';
+      document.getElementById('editModal').style.display = 'flex';
+    }
 
-            games.forEach((game, index) => {
-                const strip = document.createElement('div');
-                
-                // Check if game was played (score is not 0:0)
-                const isPlayed = game.score !== '0:0';
-                const playedClass = isPlayed ? 'played' : '';
-                
-                strip.className = `game-strip ${game.type} ${playedClass}`;
-                
-                // Check if team names are Hebrew (not PHK or PHKS)
-                const isTeam1Hebrew = !game.team1.startsWith('PHK');
-                const isTeam2Hebrew = !game.team2.startsWith('PHK');
-                
-                const team1Class = isTeam1Hebrew ? 'team hebrew' : 'team';
-                const team2Class = isTeam2Hebrew ? 'team hebrew' : 'team';
-                
-                // Truncate team names for mobile (only for tablets, not small mobiles)
-                const truncateTeam = (name, suffix) => {
-                    if (window.innerWidth <= 768 && window.innerWidth > 480) {
-                        const maxLength = 6;
-                        if (name.length > maxLength) {
-                            return name.substring(0, maxLength) + (suffix ? `<span class="team-suffix">${suffix}</span>` : '');
-                        }
-                    }
-                    return name + (suffix ? `<span class="team-suffix">${suffix}</span>` : '');
-                };
-                
-                const team1Html = truncateTeam(game.team1, game.team1Suffix);
-                const team2Html = truncateTeam(game.team2, game.team2Suffix);
+    function deleteGame(index){
+      if(confirm('Are you sure you want to delete this game?')){
+        games.splice(index,1);
+        leagueData[currentLeague].games = games;
+        saveGames(); renderGames();
+      }
+    }
 
-                // Format game number with leading zero
-                const gameNumber = (index + 1).toString().padStart(2, '0');
+    function closeModal(){ document.getElementById('editModal').style.display = 'none'; }
 
-                strip.innerHTML = `
-                    ${adminMode ? `<button class="delete-btn" onclick="deleteGame(${index})">Delete</button>` : ''}
-                    ${adminMode ? `<button class="edit-btn" onclick="editGame(${index})">Edit</button>` : ''}
-                    <div class="teams">
-                        <span class="${team1Class}">${team1Html}</span>
-                        <span class="score">${game.score}</span>
-                        <span class="${team2Class}">${team2Html}</span>
-                    </div>
-                    <div class="game-number">GAME ${gameNumber}</div>
-                    <div class="game-date">${game.date} • ${game.time}</div>
-                    <div class="venue"><a href="${game.venueLink}" target="_blank">${game.venue}</a></div>
-                `;
-                
-                container.appendChild(strip);
-            });
-        }
+    document.getElementById('editForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      const index = parseInt(document.getElementById('editIndex').value);
+      const scoreHome = document.getElementById('editScoreHome').value;
+      const scoreAway = document.getElementById('editScoreAway').value;
+      const gameData = {
+        type: document.getElementById('editType').value,
+        team1: document.getElementById('editTeam1').value,
+        team1Suffix: document.getElementById('editTeam1Suffix').value,
+        team2: document.getElementById('editTeam2').value,
+        team2Suffix: document.getElementById('editTeam2Suffix').value,
+        score: `${scoreHome}:${scoreAway}`,
+        date: document.getElementById('editDate').value,
+        time: document.getElementById('editTime').value,
+        venue: document.getElementById('editVenue').value,
+        venueLink: document.getElementById('editVenueLink').value,
+        additions: document.getElementById('editAdditions').value
+      };
+      
+      if(index === -1){
+        games.push(gameData);
+      } else {
+        games[index] = gameData;
+      }
+      
+      leagueData[currentLeague].games = games;
+      saveGames();
+      renderGames();
+      closeModal();
+    });
 
-        function toggleAdminMode() {
-            adminMode = !adminMode;
-            const btn = document.querySelector('.admin-toggle');
-            const addBtn = document.getElementById('addGameBtn');
-            const exportBtn = document.getElementById('exportBtn');
-            btn.textContent = `Admin Mode: ${adminMode ? 'ON' : 'OFF'}`;
-            btn.style.background = adminMode ? '#dc3545' : '#0066cc';
-            addBtn.style.display = adminMode ? 'block' : 'none';
-            exportBtn.style.display = adminMode ? 'block' : 'none';
-            renderGames();
-        }
+    // Click outside modal to close
+    document.getElementById('editModal').addEventListener('click', function(e){
+      if(e.target === this) closeModal();
+    });
 
-        function editGame(index) {
-            const game = games[index];
-            document.getElementById('editIndex').value = index;
-            document.getElementById('editGameNumber').value = index + 1; // Show current position
-            document.getElementById('editType').value = game.type;
-            document.getElementById('editTeam1').value = game.team1;
-            document.getElementById('editTeam1Suffix').value = game.team1Suffix;
-            document.getElementById('editTeam2').value = game.team2;
-            document.getElementById('editTeam2Suffix').value = game.team2Suffix;
-            document.getElementById('editScore').value = game.score;
-            document.getElementById('editDate').value = game.date;
-            document.getElementById('editTime').value = game.time;
-            document.getElementById('editVenue').value = game.venue;
-            document.getElementById('editVenueLink').value = game.venueLink;
-            
-            document.getElementById('editModal').classList.add('active');
-        }
+    // Service worker
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function(){
+        navigator.serviceWorker.register('./sw.js');
+      });
+    }
 
-        function addNewGame() {
-            // Set default values for new game
-            document.getElementById('editIndex').value = -1; // -1 indicates new game
-            document.getElementById('editGameNumber').value = games.length + 1; // Add at the end by default
-            document.getElementById('editType').value = 'home';
-            document.getElementById('editTeam1').value = 'PHK';
-            document.getElementById('editTeam1Suffix').value = '';
-            document.getElementById('editTeam2').value = '';
-            document.getElementById('editTeam2Suffix').value = '';
-            document.getElementById('editScore').value = '0:0';
-            document.getElementById('editDate').value = '';
-            document.getElementById('editTime').value = '';
-            document.getElementById('editVenue').value = 'ביה"ס מעיינות, רח\' הצליל 8, פרדס חנה כרכור';
-            document.getElementById('editVenueLink').value = 'https://maps.app.goo.gl/ehjmqR18a53PCmG7A';
-            
-            document.getElementById('editModal').classList.add('active');
-        }
-
-        function deleteGame(index) {
-            if (confirm('Are you sure you want to delete this game?')) {
-                games.splice(index, 1);
-                leagueData[currentLeague].games = games;
-                saveGames();
-                renderGames();
-            }
-        }
-
-        function closeModal() {
-            document.getElementById('editModal').classList.remove('active');
-        }
-
-        document.getElementById('editForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const index = document.getElementById('editIndex').value;
-            const newGameNumber = parseInt(document.getElementById('editGameNumber').value);
-            const gameData = {
-                type: document.getElementById('editType').value,
-                team1: document.getElementById('editTeam1').value,
-                team1Suffix: document.getElementById('editTeam1Suffix').value,
-                team2: document.getElementById('editTeam2').value,
-                team2Suffix: document.getElementById('editTeam2Suffix').value,
-                score: document.getElementById('editScore').value,
-                date: document.getElementById('editDate').value,
-                time: document.getElementById('editTime').value,
-                venue: document.getElementById('editVenue').value,
-                venueLink: document.getElementById('editVenueLink').value
-            };
-            
-            if (index === '-1') {
-                // Adding new game - insert at specified position
-                const insertPosition = Math.max(0, Math.min(newGameNumber - 1, games.length));
-                games.splice(insertPosition, 0, gameData);
-            } else {
-                // Editing existing game - remove from old position and insert at new position
-                const oldIndex = parseInt(index);
-                games.splice(oldIndex, 1); // Remove from old position
-                const insertPosition = Math.max(0, Math.min(newGameNumber - 1, games.length));
-                games.splice(insertPosition, 0, gameData); // Insert at new position
-            }
-            
-            leagueData[currentLeague].games = games;
-            saveGames();
-            renderGames();
-            closeModal();
-        });
-
-        // Close modal when clicking outside
-        document.getElementById('editModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeModal();
-            }
-        });
-
-        // Initial render
-        document.getElementById('leagueName').textContent = leagueData[currentLeague].name;
-    </script>
-
-<script>
-(function(){
-  const btn = document.querySelector('.league-switcher');
-  if (!btn) return;
-
-  function update(){
-    const atTop = window.scrollY <= 0;
-    btn.classList.toggle('league-switcher--hidden', !atTop);
-  }
-
-  // Initial
-  update();
-  // On scroll
-  window.addEventListener('scroll', update, { passive: true });
-})();
-</script>
-
+    // init
+    window.addEventListener('load', loadGamesFromJSON);
+  </script>
 </body>
 </html>
