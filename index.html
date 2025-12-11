@@ -170,15 +170,6 @@
     .venue a{ color:#fff; text-decoration:none; }
     .venue a:hover{ text-decoration:underline; }
     .additions{ font-size:clamp(12px, 3.5vw, 21.6px); margin-top:8px; color:#fff; font-weight:600; }
-    
-    .pizza-icon{ 
-      width:clamp(30px, 6vw, 50px); 
-      height:clamp(30px, 6vw, 50px); 
-      display:inline-block;
-      vertical-align:middle;
-      margin-left:8px;
-      margin-right:8px;
-    }
 
     .edit-btn, .delete-btn{
       position:absolute; 
@@ -371,16 +362,7 @@
         <div class="form-group"><label>Home Team Suffix (optional, e.g., S, W):</label><input type="text" id="editTeam1Suffix" maxlength="2" /></div>
         <div class="form-group"><label>Away Team:</label><input type="text" id="editTeam2" required /></div>
         <div class="form-group"><label>Away Team Suffix (optional, e.g., S, W):</label><input type="text" id="editTeam2Suffix" maxlength="2" /></div>
-        <div class="form-group">
-          <label>Score:</label>
-          <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
-            <span style="font-weight:600;">Home:</span>
-            <input type="number" id="editScoreHome" min="0" required style="width:80px;" />
-            <span style="font-weight:700; font-size:20px;">:</span>
-            <input type="number" id="editScoreAway" min="0" required style="width:80px;" />
-            <span style="font-weight:600;">Away</span>
-          </div>
-        </div>
+        <div class="form-group"><label>Score (format: 0:0):</label><input type="text" id="editScore" pattern="\d+:\d+" required /></div>
         <div class="form-group"><label>Date (e.g., Nov 13, 2025):</label><input type="text" id="editDate" required /></div>
         <div class="form-group"><label>Time (e.g., 17:30):</label><input type="text" id="editTime" required /></div>
         <div class="form-group"><label>Venue Name:</label><input type="text" id="editVenue" required /></div>
@@ -525,10 +507,6 @@
     function renderGames(){
       const container = document.getElementById('gamesContainer');
       container.innerHTML = '';
-      
-      // Determine which team to follow based on league
-      const myTeam = currentLeague === 'ב' ? 'PHK' : 'PHKשרת';
-      
       games.forEach((game, index) => {
         const el = document.createElement('div');
         const isPlayed = game.score && game.score !== '0:0';
@@ -541,79 +519,14 @@
         const t2Class = isTeam2Heb ? 'team hebrew' : 'team';
 
         const gameNumber = String(index + 1).padStart(2, '0');
-        
-        // Check if my team is winning
-        let showPizza = false;
-        let myTeamPosition = ''; // 'left' or 'right'
-        
-        if(isPlayed && game.score && game.score !== '0:0'){
-          const scores = game.score.split(':');
-          const score1 = parseInt(scores[0]);
-          const score2 = parseInt(scores[1]);
-          
-          // Check where my team is and if they won
-          const isMyTeam1 = game.team1 === myTeam;
-          const isMyTeam2 = game.team2 === myTeam;
-          
-          if(isMyTeam1 && score1 > score2){
-            showPizza = true;
-            myTeamPosition = game.type === 'home' ? 'right' : 'left';
-          } else if(isMyTeam2 && score2 > score1){
-            showPizza = true;
-            myTeamPosition = game.type === 'away' ? 'right' : 'left';
-          }
-        }
-
-        // Display logic:
-        // HOME games (blue): team1 on RIGHT, team2 on LEFT
-        // AWAY games (black): team1 on LEFT, team2 on RIGHT
-        
-        let leftTeam, rightTeam, leftTeamClass, rightTeamClass, leftSuffix, rightSuffix;
-        let leftPizza = '', rightPizza = '';
-        
-        if(game.type === 'home'){
-          // HOME game: team1 is home (right), team2 is away (left)
-          leftTeam = game.team2;
-          rightTeam = game.team1;
-          leftTeamClass = t2Class;
-          rightTeamClass = t1Class;
-          leftSuffix = game.team2Suffix || '';
-          rightSuffix = game.team1Suffix || '';
-          
-          if(showPizza && myTeamPosition === 'right'){
-            rightPizza = `<img src="pizza.png" alt="Pizza" class="pizza-icon" />`;
-          } else if(showPizza && myTeamPosition === 'left'){
-            leftPizza = `<img src="pizza.png" alt="Pizza" class="pizza-icon" />`;
-          }
-        } else {
-          // AWAY game: team1 is away (left), team2 is home (right)
-          leftTeam = game.team1;
-          rightTeam = game.team2;
-          leftTeamClass = t1Class;
-          rightTeamClass = t2Class;
-          leftSuffix = game.team1Suffix || '';
-          rightSuffix = game.team2Suffix || '';
-          
-          if(showPizza && myTeamPosition === 'left'){
-            leftPizza = `<img src="pizza.png" alt="Pizza" class="pizza-icon" />`;
-          } else if(showPizza && myTeamPosition === 'right'){
-            rightPizza = `<img src="pizza.png" alt="Pizza" class="pizza-icon" />`;
-          }
-        }
 
         el.innerHTML = `
           ${adminMode ? `<button class="delete-btn" onclick="deleteGame(${index})">Delete</button>` : ''}
           ${adminMode ? `<button class="edit-btn" onclick="editGame(${index})">Edit</button>` : ''}
           <div class="teams">
-            <span class="${leftTeamClass}">
-              ${leftPizza}
-              ${leftTeam}${leftSuffix ? `<span class="team-suffix">${leftSuffix}</span>` : ''}
-            </span>
+            <span class="${t1Class}">${game.team1}${game.team1Suffix ? `<span class="team-suffix">${game.team1Suffix}</span>` : ''}</span>
             <span class="score" aria-label="Score">${game.score || '0:0'}</span>
-            <span class="${rightTeamClass}">
-              ${rightTeam}${rightSuffix ? `<span class="team-suffix">${rightSuffix}</span>` : ''}
-              ${rightPizza}
-            </span>
+            <span class="${t2Class}">${game.team2}${game.team2Suffix ? `<span class="team-suffix">${game.team2Suffix}</span>` : ''}</span>
           </div>
           <div class="game-number">GAME ${gameNumber}</div>
           <div class="game-date">${game.date} • ${game.time}</div>
@@ -647,7 +560,6 @@
 
     function editGame(index){
       const game = games[index];
-      const scores = (game.score || '0:0').split(':');
       document.getElementById('editIndex').value = index;
       document.getElementById('editGameNumber').value = index + 1;
       document.getElementById('editType').value = game.type;
@@ -655,8 +567,7 @@
       document.getElementById('editTeam1Suffix').value = game.team1Suffix || '';
       document.getElementById('editTeam2').value = game.team2;
       document.getElementById('editTeam2Suffix').value = game.team2Suffix || '';
-      document.getElementById('editScoreHome').value = scores[0] || '0';
-      document.getElementById('editScoreAway').value = scores[1] || '0';
+      document.getElementById('editScore').value = game.score || '0:0';
       document.getElementById('editDate').value = game.date || '';
       document.getElementById('editTime').value = game.time || '';
       document.getElementById('editVenue').value = game.venue || '';
@@ -673,8 +584,7 @@
       document.getElementById('editTeam1Suffix').value = '';
       document.getElementById('editTeam2').value = '';
       document.getElementById('editTeam2Suffix').value = '';
-      document.getElementById('editScoreHome').value = '0';
-      document.getElementById('editScoreAway').value = '0';
+      document.getElementById('editScore').value = '0:0';
       document.getElementById('editDate').value = '';
       document.getElementById('editTime').value = '';
       document.getElementById('editVenue').value = 'ביה"ס מעיינות, רח\' הצליל 8, פרדס חנה כרכור';
@@ -696,15 +606,13 @@
     document.getElementById('editForm').addEventListener('submit', function(e){
       e.preventDefault();
       const index = parseInt(document.getElementById('editIndex').value);
-      const scoreHome = document.getElementById('editScoreHome').value;
-      const scoreAway = document.getElementById('editScoreAway').value;
       const gameData = {
         type: document.getElementById('editType').value,
         team1: document.getElementById('editTeam1').value,
         team1Suffix: document.getElementById('editTeam1Suffix').value,
         team2: document.getElementById('editTeam2').value,
         team2Suffix: document.getElementById('editTeam2Suffix').value,
-        score: `${scoreHome}:${scoreAway}`,
+        score: document.getElementById('editScore').value,
         date: document.getElementById('editDate').value,
         time: document.getElementById('editTime').value,
         venue: document.getElementById('editVenue').value,
