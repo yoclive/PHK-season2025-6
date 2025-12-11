@@ -147,8 +147,8 @@
       overflow-wrap:anywhere;
       hyphens:auto;
     }
-    .team:first-child{ text-align:start; }
-    .team:last-child{ text-align:end; }
+    .team:first-child{ text-align:end; }
+    .team:last-child{ text-align:start; }
     .team.hebrew{ direction:rtl; }
     .score{
       font-weight:800; 
@@ -559,18 +559,50 @@
           }
         }
 
+        // Determine display order based on game type
+        // For HOME games: Away team (left) | Score | Home team (right)
+        // For AWAY games: Home team (left) | Score | Away team (right)
+        let leftTeam, rightTeam, leftTeamClass, rightTeamClass;
+        let leftPizza = '', rightPizza = '';
+        
+        if(game.type === 'home'){
+          // HOME game: PHK is home (right side)
+          leftTeam = game.team2;
+          leftTeamClass = t2Class;
+          rightTeam = game.team1;
+          rightTeamClass = t1Class;
+          if(showPizza && pizzaPosition === 'left'){
+            rightPizza = `<img src="pizza.png" alt="Pizza" class="pizza-icon" />`;
+          }
+          if(showPizza && pizzaPosition === 'right'){
+            leftPizza = `<img src="pizza.png" alt="Pizza" class="pizza-icon" />`;
+          }
+        } else {
+          // AWAY game: PHK is away (left side), opponent is home (right side)
+          leftTeam = game.team1;
+          leftTeamClass = t1Class;
+          rightTeam = game.team2;
+          rightTeamClass = t2Class;
+          if(showPizza && pizzaPosition === 'left'){
+            leftPizza = `<img src="pizza.png" alt="Pizza" class="pizza-icon" />`;
+          }
+          if(showPizza && pizzaPosition === 'right'){
+            rightPizza = `<img src="pizza.png" alt="Pizza" class="pizza-icon" />`;
+          }
+        }
+
         el.innerHTML = `
           ${adminMode ? `<button class="delete-btn" onclick="deleteGame(${index})">Delete</button>` : ''}
           ${adminMode ? `<button class="edit-btn" onclick="editGame(${index})">Edit</button>` : ''}
           <div class="teams">
-            <span class="${t2Class}">
-              ${showPizza && pizzaPosition === 'right' ? `<img src="pizza.png" alt="Pizza" class="pizza-icon" />` : ''}
-              ${game.team2}${game.team2Suffix ? `<span class="team-suffix">${game.team2Suffix}</span>` : ''}
+            <span class="${leftTeamClass}">
+              ${leftPizza}
+              ${leftTeam}${game.type === 'home' ? (game.team2Suffix ? `<span class="team-suffix">${game.team2Suffix}</span>` : '') : (game.team1Suffix ? `<span class="team-suffix">${game.team1Suffix}</span>` : '')}
             </span>
             <span class="score" aria-label="Score">${game.score || '0:0'}</span>
-            <span class="${t1Class}">
-              ${game.team1}${game.team1Suffix ? `<span class="team-suffix">${game.team1Suffix}</span>` : ''}
-              ${showPizza && pizzaPosition === 'left' ? `<img src="pizza.png" alt="Pizza" class="pizza-icon" />` : ''}
+            <span class="${rightTeamClass}">
+              ${rightTeam}${game.type === 'home' ? (game.team1Suffix ? `<span class="team-suffix">${game.team1Suffix}</span>` : '') : (game.team2Suffix ? `<span class="team-suffix">${game.team2Suffix}</span>` : '')}
+              ${rightPizza}
             </span>
           </div>
           <div class="game-number">GAME ${gameNumber}</div>
