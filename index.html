@@ -538,6 +538,15 @@
     }
 
     function toggleAdminMode(){
+      if(!adminMode){
+        // Prompt for password when turning ON admin mode
+        const password = prompt('Enter admin password:');
+        if(password !== 'PHK2025'){
+          alert('Incorrect password');
+          return;
+        }
+      }
+      
       adminMode = !adminMode;
       const btn = document.querySelector('.admin-toggle');
       const addBtn = document.getElementById('addGameBtn');
